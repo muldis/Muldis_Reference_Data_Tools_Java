@@ -1,0 +1,9 @@
+# Mac OS X filesystem metadata files.
+*.DS_Store
+
+# Build products.
+target/
+
+# IntelliJ metadata files.
+.idea/
+*.iml
