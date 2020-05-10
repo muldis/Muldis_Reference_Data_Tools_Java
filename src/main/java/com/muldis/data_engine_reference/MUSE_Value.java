@@ -5,6 +5,8 @@ public final class MUSE_Value
     MUSE_Machine machine;
     MDL_Any      value;
 
+    MUSE_Value() {}
+
     MUSE_Value init(final MUSE_Machine machine)
     {
         this.machine = machine;

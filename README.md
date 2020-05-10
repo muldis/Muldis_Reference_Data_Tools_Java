@@ -1,6 +1,6 @@
 # NAME
 
-Muldis Data Engine Reference: Java (MDE) - Reference Implementation of Muldis Data Language Over Java
+Muldis Data Engine Reference: Java (MDE) - Reference implementation of Muldis Data Language
 
 # VERSION
 

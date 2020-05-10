@@ -1,10 +1,14 @@
 package com.muldis.data_engine_reference;
 
+import java.util.Arrays;
+
 public final class MUSE_Factory
 {
     MUSE_Entrance entrance;
 
-    MUSE_Factory init(MUSE_Entrance entrance)
+    MUSE_Factory() {}
+
+    MUSE_Factory init(final MUSE_Entrance entrance)
     {
         this.entrance = entrance;
         return this;
@@ -19,7 +23,14 @@ public final class MUSE_Factory
 
     public MUSE_Machine new_MUSE_Machine(final Object requested_model_version)
     {
-        // TODO: Check for and fail/return-null if: We don't support the requested specific model version.
+        String[] only_supported_model_version = new String[]
+            {"Muldis_Data_Language", "https://muldis.com", "0.300.0"};
+        if (!(requested_model_version instanceof String[])
+            || !Arrays.equals((String[]) requested_model_version, only_supported_model_version))
+        {
+            // We don't support the requested specific model version.
+            return null;
+        }
         // We support the requested specific model version.
         return new MUSE_Machine().init(this);
     }
