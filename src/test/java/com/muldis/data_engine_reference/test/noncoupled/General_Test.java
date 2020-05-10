@@ -12,9 +12,6 @@ import org.junit.jupiter.api.Test;
 
 public final class General_Test
 {
-    private static final String MUSE_server_entrance_class_name
-        = "com.muldis.data_engine_reference.MUSE_Entrance";
-
     private static final String[] requested_model_version
         = new String[] {"Muldis_Data_Language", "https://muldis.com", "0.300.0"};
 
@@ -24,6 +21,14 @@ public final class General_Test
             InvocationTargetException, InstantiationException, IllegalAccessException
     {
         assertTrue(true);
+
+        String MUSE_server_entrance_class_name
+            = System.getProperty("MUSE_server_entrance_class_name");
+        if (MUSE_server_entrance_class_name == null)
+        {
+            throw new IllegalStateException("Usage requires -DMUSE_server_entrance_class_name"
+                + "=com.muldis.data_engine_reference.MUSE_Entrance or similar.");
+        }
 
         MUSE_Factory factory = MUSE_Entrance.new_MUSE_Factory(MUSE_server_entrance_class_name);
 
