@@ -4,22 +4,14 @@ import java.util.Arrays;
 
 public final class MUSE_Factory
 {
-    MUSE_Entrance entrance;
+    public final MUSE_Entrance MUSE_Entrance;
 
-    MUSE_Factory() {}
-
-    MUSE_Factory init(final MUSE_Entrance entrance)
+    MUSE_Factory(final MUSE_Entrance entrance)
     {
-        this.entrance = entrance;
-        return this;
+        this.MUSE_Entrance = entrance;
     }
 
     public void provides_Muldis_Service_Protocol_Factory() {}
-
-    public MUSE_Entrance MUSE_Entrance()
-    {
-        return this.entrance;
-    }
 
     public MUSE_Machine new_MUSE_Machine(final Object requested_model_version)
     {
@@ -32,6 +24,6 @@ public final class MUSE_Factory
             return null;
         }
         // We support the requested specific model version.
-        return new MUSE_Machine().init(this);
+        return new MUSE_Machine(this);
     }
 }

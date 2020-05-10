@@ -4,26 +4,19 @@ import java.util.AbstractMap.SimpleImmutableEntry;
 
 public final class MUSE_Machine
 {
-    MUSE_Factory factory;
-    Memory       memory;
-    // Executor    executor;
+    public final MUSE_Factory MUSE_Factory;
 
-    MUSE_Machine() {}
+    Memory memory;
+    // Executor executor;
 
-    MUSE_Machine init(final MUSE_Factory factory)
+    MUSE_Machine(final MUSE_Factory factory)
     {
-        this.factory  = factory;
-        this.memory   = new Memory();
+        this.MUSE_Factory = factory;
+        this.memory       = new Memory();
         // this.executor = this.memory.Executor;
-        return this;
     }
 
     public void provides_Muldis_Service_Protocol_Machine() {}
-
-    public MUSE_Factory MUSE_Factory()
-    {
-        return this.factory;
-    }
 
     public MUSE_Value MUSE_evaluate(final MUSE_Value function)
     {
@@ -32,7 +25,7 @@ public final class MUSE_Machine
             throw new IllegalArgumentException("Argument \"function\" must not be null.");
         }
         // TODO: Actually do the work.
-        return new MUSE_Value().init(this, this.memory.MDL_Ignorance);
+        return new MUSE_Value(this, this.memory.MDL_Ignorance);
     }
 
     public MUSE_Value MUSE_evaluate(final MUSE_Value function, MUSE_Value args)
@@ -46,7 +39,7 @@ public final class MUSE_Machine
             throw new IllegalArgumentException("Argument \"args\" must not be null.");
         }
         // TODO: Actually do the work.
-        return new MUSE_Value().init(this, this.memory.MDL_Ignorance);
+        return new MUSE_Value(this, this.memory.MDL_Ignorance);
     }
 
     public void MUSE_perform(final MUSE_Value procedure)
@@ -77,7 +70,7 @@ public final class MUSE_Machine
         {
             throw new IllegalArgumentException("Argument \"variable\" must not be null.");
         }
-        return new MUSE_Value().init(this, variable.value.MDL_Variable());
+        return new MUSE_Value(this, variable.value.MDL_Variable());
     }
 
     public void MUSE_assign(final MUSE_Value variable, final MUSE_Value new_current)
@@ -96,7 +89,7 @@ public final class MUSE_Machine
     public MUSE_Value MUSE_import(final Object value)
     {
         // TODO: Actually import the argument.
-        return new MUSE_Value().init(this, this.memory.MDL_Ignorance);
+        return new MUSE_Value(this, this.memory.MDL_Ignorance);
     }
 
     public MUSE_Value MUSE_import_qualified(final SimpleImmutableEntry<String, Object> value)
@@ -106,7 +99,7 @@ public final class MUSE_Machine
             throw new IllegalArgumentException("Argument \"value\" must not be null.");
         }
         // TODO: Actually import the argument.
-        return new MUSE_Value().init(this, this.memory.MDL_Ignorance);
+        return new MUSE_Value(this, this.memory.MDL_Ignorance);
     }
 
     public Object MUSE_export(final MUSE_Value value)

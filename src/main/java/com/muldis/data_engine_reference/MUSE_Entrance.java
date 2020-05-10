@@ -19,6 +19,6 @@ public final class MUSE_Entrance
             return null;
         }
         // We support the requested specific MUSE version.
-        return new MUSE_Factory().init(this);
+        return new MUSE_Factory(this);
     }
 }
