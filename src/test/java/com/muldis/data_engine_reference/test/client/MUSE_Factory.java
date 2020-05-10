@@ -14,14 +14,11 @@ public final class MUSE_Factory
     public void provides_Muldis_Service_Protocol_Factory() {}
 
     public MUSE_Machine new_MUSE_Machine(final Object requested_model_version)
-        throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
+        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
-        Object server_machine = this.server_factory.getClass().getMethod("new_MUSE_Machine")
-            .invoke(this.server_factory, new Object[] { requested_model_version });
-        if (server_machine == null)
-        {
-            return null;
-        }
-        return new MUSE_Machine(this, server_machine);
+        Object server_machine = this.server_factory.getClass()
+            .getMethod("new_MUSE_Machine", Object.class)
+            .invoke(this.server_factory, requested_model_version);
+        return server_machine == null ? null : new MUSE_Machine(this, server_machine);
     }
 }

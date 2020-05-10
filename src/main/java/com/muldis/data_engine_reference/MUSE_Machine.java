@@ -92,7 +92,7 @@ public final class MUSE_Machine
         return new MUSE_Value(this, this.memory.MDL_Ignorance);
     }
 
-    public MUSE_Value MUSE_import_qualified(final SimpleImmutableEntry<String,Object> value)
+    public MUSE_Value MUSE_import_qualified(final SimpleImmutableEntry<String, Object> value)
     {
         if (value == null)
         {
@@ -112,7 +112,7 @@ public final class MUSE_Machine
         return null;
     }
 
-    public SimpleImmutableEntry<String,Object> MUSE_export_qualified(final MUSE_Value value)
+    public SimpleImmutableEntry<String, Object> MUSE_export_qualified(final MUSE_Value value)
     {
         if (value == null)
         {
