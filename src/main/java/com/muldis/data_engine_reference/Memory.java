@@ -2,6 +2,8 @@ package com.muldis.data_engine_reference;
 
 final class Memory
 {
+    final Executor Executor;
+
     final MDL_Any MDL_Ignorance;
 
     final MDL_Any MDL_False;
@@ -9,10 +11,12 @@ final class Memory
 
     Memory()
     {
-        MDL_Ignorance = new MDL_Any(this, Well_Known_Base_Type.MDL_Ignorance, null);
+        this.Executor = new Executor(this);
 
-        MDL_False = new MDL_Any(this, Well_Known_Base_Type.MDL_False, null);
-        MDL_True  = new MDL_Any(this, Well_Known_Base_Type.MDL_True, null);
+        this.MDL_Ignorance = new MDL_Any(this, Well_Known_Base_Type.MDL_Ignorance, null);
+
+        this.MDL_False = new MDL_Any(this, Well_Known_Base_Type.MDL_False, null);
+        this.MDL_True  = new MDL_Any(this, Well_Known_Base_Type.MDL_True, null);
     }
 
     MDL_Any MDL_Boolean(final Boolean value)

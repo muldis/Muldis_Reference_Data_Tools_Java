@@ -17,18 +17,6 @@ public final class MUSE_Machine
 
     public void provides_Muldis_Service_Protocol_Machine() {}
 
-    public MUSE_Value MUSE_evaluate(final MUSE_Value function)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
-    {
-        if (function == null)
-        {
-            throw new IllegalArgumentException("Argument \"function\" must not be null.");
-        }
-        return new MUSE_Value(this, this.server_machine.getClass()
-            .getMethod("MUSE_evaluate", Object.class)
-            .invoke(this.server_machine, function.server_value));
-    }
-
     public MUSE_Value MUSE_evaluate(final MUSE_Value function, final MUSE_Value args)
         throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
@@ -39,18 +27,6 @@ public final class MUSE_Machine
         return new MUSE_Value(this, this.server_machine.getClass()
             .getMethod("MUSE_evaluate", Object.class, Object.class)
             .invoke(this.server_machine, function.server_value, args.server_value));
-    }
-
-    public void MUSE_perform(final MUSE_Value procedure)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
-    {
-        if (procedure == null)
-        {
-            throw new IllegalArgumentException("Argument \"procedure\" must not be null.");
-        }
-        this.server_machine.getClass()
-            .getMethod("MUSE_perform", Object.class)
-            .invoke(this.server_machine, procedure.server_value);
     }
 
     public void MUSE_perform(final MUSE_Value procedure, final MUSE_Value args)

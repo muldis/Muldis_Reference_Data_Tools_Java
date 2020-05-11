@@ -6,11 +6,6 @@ public final class MUSE_Value
 
     MDL_Any value;
 
-    MUSE_Value(final MUSE_Machine machine)
-    {
-        this.MUSE_Machine = machine;
-    }
-
     MUSE_Value(final MUSE_Machine machine, final MDL_Any value)
     {
         this.MUSE_Machine = machine;

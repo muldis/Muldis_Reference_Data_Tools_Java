@@ -6,11 +6,6 @@ public final class MUSE_Value
 
     Object server_value;
 
-    MUSE_Value(final MUSE_Machine machine)
-    {
-        this.MUSE_Machine = machine;
-    }
-
     MUSE_Value(final MUSE_Machine machine, final Object server_value)
     {
         this.MUSE_Machine = machine;
