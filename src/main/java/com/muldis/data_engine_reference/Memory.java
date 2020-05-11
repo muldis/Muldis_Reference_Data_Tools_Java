@@ -2,6 +2,8 @@ package com.muldis.data_engine_reference;
 
 final class Memory
 {
+    final MUON_Generator_Preview MUON_Generator_Preview;
+
     final Executor Executor;
 
     final MDL_Any MDL_Ignorance;
@@ -11,6 +13,8 @@ final class Memory
 
     Memory()
     {
+        this.MUON_Generator_Preview = new MUON_Generator_Preview();
+
         this.Executor = new Executor(this);
 
         this.MDL_Ignorance = new MDL_Any(this, Well_Known_Base_Type.MDL_Ignorance, null);

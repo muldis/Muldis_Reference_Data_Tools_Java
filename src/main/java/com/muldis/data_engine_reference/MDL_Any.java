@@ -31,7 +31,7 @@ final class MDL_Any
 
     public String toString()
     {
-        return "The To String Of The Thing.";
+        return this.memory.MUON_Generator_Preview.MDL_Any_To_Preview_String(this);
     }
 
     MDL_Any MDL_Variable()
