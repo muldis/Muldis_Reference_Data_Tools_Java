@@ -28,7 +28,8 @@ public final class MUSE_Machine
         {
             throw new IllegalArgumentException("Argument \"args\" must not be null.");
         }
-        return new MUSE_Value(this, this.executor.evaluates(function.value, args.value));
+        return new MUSE_Value(this,
+            this.executor.evaluates(function.memory_value, args.memory_value));
     }
 
     public void MUSE_perform(final MUSE_Value procedure, final MUSE_Value args)
@@ -41,7 +42,7 @@ public final class MUSE_Machine
         {
             throw new IllegalArgumentException("Argument \"args\" must not be null.");
         }
-        this.executor.performs(procedure.value, args.value);
+        this.executor.performs(procedure.memory_value, args.memory_value);
     }
 
     public MUSE_Value MUSE_current(final MUSE_Value variable)
@@ -50,7 +51,7 @@ public final class MUSE_Machine
         {
             throw new IllegalArgumentException("Argument \"variable\" must not be null.");
         }
-        return new MUSE_Value(this, variable.value.MDL_Variable());
+        return new MUSE_Value(this, variable.memory_value.MDL_Variable());
     }
 
     public void MUSE_assign(final MUSE_Value variable, final MUSE_Value new_current)
@@ -63,7 +64,7 @@ public final class MUSE_Machine
         {
             throw new IllegalArgumentException("Argument \"new_current\" must not be null.");
         }
-        variable.value.details = new_current.value;
+        variable.memory_value.details = new_current.memory_value;
     }
 
     public MUSE_Value MUSE_import(final Object value)
@@ -86,7 +87,7 @@ public final class MUSE_Machine
         {
             if (value instanceof MUSE_Value)
             {
-                return ((MUSE_Value)value).value;
+                return ((MUSE_Value)value).memory_value;
             }
             if (value instanceof SimpleImmutableEntry)
             {
@@ -110,7 +111,7 @@ public final class MUSE_Machine
             case "New_Variable":
                 if (v instanceof MUSE_Value)
                 {
-                    return this.memory.new_MDL_Variable(((MUSE_Value)v).value);
+                    return this.memory.new_MDL_Variable(((MUSE_Value)v).memory_value);
                 }
                 break;
             case "New_External":
@@ -140,7 +141,7 @@ public final class MUSE_Machine
         {
             throw new IllegalArgumentException("Argument \"value\" must not be null.");
         }
-        MDL_Any v = value.value;
+        MDL_Any v = value.memory_value;
         switch (v.WKBT)
         {
             case MDL_Ignorance:
@@ -165,7 +166,7 @@ public final class MUSE_Machine
         {
             throw new IllegalArgumentException("Argument \"value\" must not be null.");
         }
-        MDL_Any v = value.value;
+        MDL_Any v = value.memory_value;
         switch (v.WKBT)
         {
             case MDL_Ignorance:
