@@ -72,50 +72,40 @@ public final class MUSE_Machine
         return new MUSE_Value(this, import__tree(value));
     }
 
-    public MUSE_Value MUSE_import_qualified(final SimpleImmutableEntry<String, Object> value)
-    {
-        if (value == null)
-        {
-            throw new IllegalArgumentException("Argument \"value\" must not be null.");
-        }
-        return new MUSE_Value(this, import__tree_qualified(value));
-    }
-
     private MDL_Any import__tree(final Object value)
     {
-        if (value != null)
-        {
-            if (value instanceof MUSE_Value)
-            {
-                return ((MUSE_Value)value).memory_value;
-            }
-            if (value instanceof SimpleImmutableEntry)
-            {
-                return import__tree_qualified((SimpleImmutableEntry<String, Object>)value);
-            }
-        }
-        return import__tree_unqualified(value);
+        return (value instanceof SimpleImmutableEntry
+                && ((SimpleImmutableEntry)value).getKey() instanceof String)
+            ? import__tree_qualified((SimpleImmutableEntry<String, Object>)value)
+            : import__tree_unqualified(value);
     }
 
     private MDL_Any import__tree_qualified(final SimpleImmutableEntry<String, Object> value)
     {
-        Object v = value.getValue();
-        switch (value.getKey())
+        String MUON_predicate = value.getKey();
+        Object MUON_subject = value.getValue();
+        switch (MUON_predicate)
         {
-            case "Boolean":
-                if (v instanceof Boolean)
+            case "Ignorance":
+                if (MUON_subject == null)
                 {
-                    return this.memory.MDL_Boolean((Boolean)v);
+                    return this.memory.MDL_Ignorance;
+                }
+                break;
+            case "Boolean":
+                if (MUON_subject instanceof Boolean)
+                {
+                    return this.memory.MDL_Boolean((Boolean)MUON_subject);
                 }
                 break;
             case "New_Variable":
-                if (v instanceof MUSE_Value)
+                if (MUON_subject instanceof MUSE_Value)
                 {
-                    return this.memory.new_MDL_Variable(((MUSE_Value)v).memory_value);
+                    return this.memory.new_MDL_Variable(((MUSE_Value)MUON_subject).memory_value);
                 }
                 break;
             case "New_External":
-                return this.memory.new_MDL_External(v);
+                return this.memory.new_MDL_External(MUON_subject);
             default:
                 throw new UnsupportedOperationException("Unhandled MUSE value type.");
         }
@@ -131,6 +121,10 @@ public final class MUSE_Machine
         if (value instanceof Boolean)
         {
             return this.memory.MDL_Boolean((Boolean)value);
+        }
+        if (value instanceof MUSE_Value)
+        {
+            return ((MUSE_Value)value).memory_value;
         }
         throw new UnsupportedOperationException("Unhandled MUSE value type.");
     }
@@ -150,31 +144,6 @@ public final class MUSE_Machine
                 return false;
             case MDL_True:
                 return true;
-            case MDL_Variable:
-                return new SimpleImmutableEntry<String, Object>("New_Variable",
-                    new MUSE_Value(this, v.MDL_Variable()));
-            case MDL_External:
-                return new SimpleImmutableEntry<String, Object>("New_External", v.MDL_External());
-            default:
-                throw new UnsupportedOperationException("Unhandled MUSE value type.");
-        }
-    }
-
-    public SimpleImmutableEntry<String, Object> MUSE_export_qualified(final MUSE_Value value)
-    {
-        if (value == null)
-        {
-            throw new IllegalArgumentException("Argument \"value\" must not be null.");
-        }
-        MDL_Any v = value.memory_value;
-        switch (v.WKBT)
-        {
-            case MDL_Ignorance:
-                return new SimpleImmutableEntry<String, Object>("Ignorance", null);
-            case MDL_False:
-                return new SimpleImmutableEntry<String, Object>("Boolean", false);
-            case MDL_True:
-                return new SimpleImmutableEntry<String, Object>("Boolean", true);
             case MDL_Variable:
                 return new SimpleImmutableEntry<String, Object>("New_Variable",
                     new MUSE_Value(this, v.MDL_Variable()));

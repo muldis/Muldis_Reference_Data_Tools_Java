@@ -1,7 +1,6 @@
 package com.muldis.data_engine_reference.test.client;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.AbstractMap.SimpleImmutableEntry;
 
 public final class MUSE_Machine
 {
@@ -81,18 +80,6 @@ public final class MUSE_Machine
             .invoke(this.server_machine, value));
     }
 
-    public MUSE_Value MUSE_import_qualified(final SimpleImmutableEntry<String, Object> value)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
-    {
-        if (value == null)
-        {
-            throw new IllegalArgumentException("Argument \"value\" must not be null.");
-        }
-        return new MUSE_Value(this, this.server_machine.getClass()
-            .getMethod("MUSE_import_qualified", SimpleImmutableEntry.class)
-            .invoke(this.server_machine, value));
-    }
-
     public Object MUSE_export(final MUSE_Value value)
         throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
@@ -102,18 +89,6 @@ public final class MUSE_Machine
         }
         return this.server_machine.getClass()
             .getMethod("MUSE_export", Object.class)
-            .invoke(this.server_machine, value.server_value);
-    }
-
-    public SimpleImmutableEntry<String, Object> MUSE_export_qualified(final MUSE_Value value)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
-    {
-        if (value == null)
-        {
-            throw new IllegalArgumentException("Argument \"value\" must not be null.");
-        }
-        return (SimpleImmutableEntry<String, Object>)this.server_machine.getClass()
-            .getMethod("MUSE_export_qualified", Object.class)
             .invoke(this.server_machine, value.server_value);
     }
 }
