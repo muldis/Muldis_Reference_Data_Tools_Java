@@ -79,16 +79,4 @@ public final class MUSE_Machine
             .getMethod("MUSE_import", Object.class)
             .invoke(this.server_machine, value));
     }
-
-    public Object MUSE_export(final MUSE_Value value)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
-    {
-        if (value == null)
-        {
-            throw new IllegalArgumentException("Argument \"value\" must not be null.");
-        }
-        return this.server_machine.getClass()
-            .getMethod("MUSE_export", Object.class)
-            .invoke(this.server_machine, value.server_value);
-    }
 }

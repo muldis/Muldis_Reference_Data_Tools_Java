@@ -128,29 +128,4 @@ public final class MUSE_Machine
         }
         throw new UnsupportedOperationException("Unhandled MUSE value type.");
     }
-
-    public Object MUSE_export(final MUSE_Value value)
-    {
-        if (value == null)
-        {
-            throw new IllegalArgumentException("Argument \"value\" must not be null.");
-        }
-        MDL_Any v = value.memory_value;
-        switch (v.WKBT)
-        {
-            case MDL_Ignorance:
-                return null;
-            case MDL_False:
-                return false;
-            case MDL_True:
-                return true;
-            case MDL_Variable:
-                return new SimpleImmutableEntry<String, Object>("New_Variable",
-                    new MUSE_Value(this, v.MDL_Variable()));
-            case MDL_External:
-                return new SimpleImmutableEntry<String, Object>("New_External", v.MDL_External());
-            default:
-                throw new UnsupportedOperationException("Unhandled MUSE value type.");
-        }
-    }
 }
