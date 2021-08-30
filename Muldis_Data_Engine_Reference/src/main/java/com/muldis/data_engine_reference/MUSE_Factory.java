@@ -14,7 +14,9 @@ public final class MUSE_Factory
         this.MUSE_Entrance = entrance;
     }
 
-    public void provides_Muldis_Service_Protocol_Factory() {}
+    public void provides_Muldis_Service_Protocol_Factory()
+    {
+    }
 
     public MUSE_Machine new_MUSE_Machine(final Object requested_model_version)
     {

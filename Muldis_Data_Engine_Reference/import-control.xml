@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE import-control PUBLIC
+          "-//Checkstyle//DTD ImportControl Configuration 1.4//EN"
+          "https://checkstyle.org/dtds/import_control_1_4.dtd">
+
+<import-control pkg="com.muldis">
+    <allow pkg="java"/>
+    <subpackage name="data_engine_reference">
+    </subpackage>
+    <subpackage name="data_engine_reference_test">
+        <allow pkg="org.junit.jupiter"/>
+        <subpackage name="coupled">
+            <allow pkg="com.muldis.data_engine_reference"/>
+        </subpackage>
+        <subpackage name="noncoupled">
+            <allow pkg="com.muldis.data_engine_reference_test.client"/>
+        </subpackage>
+    </subpackage>
+</import-control>

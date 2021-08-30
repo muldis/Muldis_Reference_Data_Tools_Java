@@ -6,7 +6,9 @@ public final class MUSE_Machine
 {
     public final MUSE_Factory MUSE_Factory;
 
+    @SuppressWarnings("checkstyle:VisibilityModifier")
     Memory   memory;
+    @SuppressWarnings("checkstyle:VisibilityModifier")
     Executor executor;
 
     MUSE_Machine(final MUSE_Factory factory)
@@ -16,7 +18,9 @@ public final class MUSE_Machine
         this.executor     = this.memory.Executor;
     }
 
-    public void provides_Muldis_Service_Protocol_Machine() {}
+    public void provides_Muldis_Service_Protocol_Machine()
+    {
+    }
 
     public MUSE_Value MUSE_evaluate(final MUSE_Value function, final MUSE_Value args)
     {
@@ -75,15 +79,15 @@ public final class MUSE_Machine
     private MDL_Any import__tree(final Object value)
     {
         return (value instanceof SimpleImmutableEntry
-                && ((SimpleImmutableEntry)value).getKey() instanceof String)
-            ? import__tree_qualified((SimpleImmutableEntry<String, Object>)value)
+                && ((SimpleImmutableEntry) value).getKey() instanceof String)
+            ? import__tree_qualified((SimpleImmutableEntry<String, Object>) value)
             : import__tree_unqualified(value);
     }
 
     private MDL_Any import__tree_qualified(final SimpleImmutableEntry<String, Object> value)
     {
-        String MUON_predicate = value.getKey();
-        Object MUON_subject = value.getValue();
+        final String MUON_predicate = value.getKey();
+        final Object MUON_subject = value.getValue();
         switch (MUON_predicate)
         {
             case "Ignorance":
@@ -95,13 +99,13 @@ public final class MUSE_Machine
             case "Boolean":
                 if (MUON_subject instanceof Boolean)
                 {
-                    return this.memory.MDL_Boolean((Boolean)MUON_subject);
+                    return this.memory.MDL_Boolean((Boolean) MUON_subject);
                 }
                 break;
             case "New_Variable":
                 if (MUON_subject instanceof MUSE_Value)
                 {
-                    return this.memory.new_MDL_Variable(((MUSE_Value)MUON_subject).memory_value);
+                    return this.memory.new_MDL_Variable(((MUSE_Value) MUON_subject).memory_value);
                 }
                 break;
             case "New_External":
@@ -120,11 +124,11 @@ public final class MUSE_Machine
         }
         if (value instanceof Boolean)
         {
-            return this.memory.MDL_Boolean((Boolean)value);
+            return this.memory.MDL_Boolean((Boolean) value);
         }
         if (value instanceof MUSE_Value)
         {
-            return ((MUSE_Value)value).memory_value;
+            return ((MUSE_Value) value).memory_value;
         }
         throw new UnsupportedOperationException("Unhandled MUSE value type.");
     }

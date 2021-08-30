@@ -20,6 +20,7 @@ final class MDL_Any
         Data Language environment, which the MDL_External value is an opaque
         and transient reference to.
     */
+    @SuppressWarnings("checkstyle:VisibilityModifier")
     Object details;
 
     MDL_Any(final Memory memory, final Well_Known_Base_Type WKBT, final Object details)
@@ -36,11 +37,11 @@ final class MDL_Any
 
     MDL_Any MDL_Variable()
     {
-        return (MDL_Any)details;
+        return (MDL_Any) details;
     }
 
     Object MDL_External()
     {
-        return (Object)details;
+        return (Object) details;
     }
 }

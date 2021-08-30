@@ -1,4 +1,4 @@
-package com.muldis.data_engine_reference.test.client;
+package com.muldis.data_engine_reference_test.client;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -6,6 +6,7 @@ public final class MUSE_Value
 {
     public final MUSE_Machine MUSE_Machine;
 
+    @SuppressWarnings("checkstyle:VisibilityModifier")
     Object server_value;
 
     MUSE_Value(final MUSE_Machine machine, final Object server_value)
@@ -19,7 +20,9 @@ public final class MUSE_Value
         return this.server_value.toString();
     }
 
-    public void provides_Muldis_Service_Protocol_Value() {}
+    public void provides_Muldis_Service_Protocol_Value()
+    {
+    }
 
     public Object MUSE_export()
         throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
