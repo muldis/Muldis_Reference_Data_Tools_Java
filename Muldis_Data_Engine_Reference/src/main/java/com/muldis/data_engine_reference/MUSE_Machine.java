@@ -7,9 +7,9 @@ public final class MUSE_Machine
     public final MUSE_Factory MUSE_Factory;
 
     @SuppressWarnings("checkstyle:VisibilityModifier")
-    Memory   memory;
+    final Memory memory;
     @SuppressWarnings("checkstyle:VisibilityModifier")
-    Executor executor;
+    final Executor executor;
 
     MUSE_Machine(final MUSE_Factory factory)
     {
@@ -20,6 +20,11 @@ public final class MUSE_Machine
 
     public void provides_Muldis_Service_Protocol_Machine()
     {
+    }
+
+    public Boolean provides_MUSE_version(final Object requested_MUSE_version)
+    {
+        return this.MUSE_Factory.provides_MUSE_version(requested_MUSE_version);
     }
 
     public MUSE_Value MUSE_evaluate(final MUSE_Value function, final MUSE_Value args)

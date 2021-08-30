@@ -7,7 +7,7 @@ public final class MUSE_Value
     public final MUSE_Machine MUSE_Machine;
 
     @SuppressWarnings("checkstyle:VisibilityModifier")
-    MDL_Any memory_value;
+    final MDL_Any memory_value;
 
     MUSE_Value(final MUSE_Machine machine, final MDL_Any memory_value)
     {
@@ -22,6 +22,11 @@ public final class MUSE_Value
 
     public void provides_Muldis_Service_Protocol_Value()
     {
+    }
+
+    public Boolean provides_MUSE_version(final Object requested_MUSE_version)
+    {
+        return this.MUSE_Machine.provides_MUSE_version(requested_MUSE_version);
     }
 
     public Object MUSE_export()

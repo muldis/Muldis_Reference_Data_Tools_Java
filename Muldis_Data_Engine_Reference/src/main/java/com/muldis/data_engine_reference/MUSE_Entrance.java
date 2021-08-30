@@ -15,10 +15,14 @@ public final class MUSE_Entrance
     {
     }
 
+    public Boolean provides_MUSE_version(final Object requested_MUSE_version)
+    {
+        return requested_MUSE_version instanceof String[]
+            && Arrays.equals((String[]) requested_MUSE_version, only_supported_MUSE_version);
+    }
+
     public MUSE_Factory new_MUSE_Factory(final Object requested_MUSE_version)
     {
-        return (requested_MUSE_version instanceof String[]
-                && Arrays.equals((String[]) requested_MUSE_version, only_supported_MUSE_version))
-            ? new MUSE_Factory(this) : null;
+        return this.provides_MUSE_version(requested_MUSE_version) ? new MUSE_Factory() : null;
     }
 }
