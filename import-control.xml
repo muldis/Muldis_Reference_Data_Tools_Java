@@ -5,6 +5,12 @@
 
 <import-control pkg="com.muldis">
     <allow pkg="java"/>
+    <subpackage name="object_notation_validator">
+    </subpackage>
+    <subpackage name="object_notation_validator_test">
+        <allow pkg="com.muldis.object_notation_validator"/>
+        <allow pkg="org.junit.jupiter"/>
+    </subpackage>
     <subpackage name="service_protocol_bridge_reference">
     </subpackage>
     <subpackage name="service_protocol_bridge_reference_test">

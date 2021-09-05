@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>Muldis_Object_Notation_Validator</module>
         <module>Muldis_Service_Protocol_Bridge_Reference</module>
         <module>Muldis_Data_Engine_Reference</module>
     </modules>

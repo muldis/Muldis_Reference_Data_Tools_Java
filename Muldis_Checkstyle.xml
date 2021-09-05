@@ -243,7 +243,7 @@
 
         <!-- MISCELLANEOUS -->
         <module name="ArrayTypeStyle"/>
-        <module name="AvoidEscapedUnicodeCharacters"/>
+        <!-- Deliberately excluding module: <module name="AvoidEscapedUnicodeCharacters"/> -->
         <module name="CommentsIndentation"/>
         <module name="DescendantToken"/>
         <module name="FinalParameters">
