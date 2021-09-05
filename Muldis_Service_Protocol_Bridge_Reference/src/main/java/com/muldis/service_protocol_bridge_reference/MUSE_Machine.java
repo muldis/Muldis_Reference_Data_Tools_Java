@@ -1,4 +1,4 @@
-package com.muldis.data_engine_reference_test.client;
+package com.muldis.service_protocol_bridge_reference;
 
 import java.lang.reflect.InvocationTargetException;
 

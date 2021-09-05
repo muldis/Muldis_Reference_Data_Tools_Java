@@ -1,9 +1,9 @@
 package com.muldis.data_engine_reference_test.noncoupled;
 
-import com.muldis.data_engine_reference_test.client.MUSE_Entrance;
-import com.muldis.data_engine_reference_test.client.MUSE_Factory;
-import com.muldis.data_engine_reference_test.client.MUSE_Machine;
-import com.muldis.data_engine_reference_test.client.MUSE_Value;
+import com.muldis.service_protocol_bridge_reference.MUSE_Entrance;
+import com.muldis.service_protocol_bridge_reference.MUSE_Factory;
+import com.muldis.service_protocol_bridge_reference.MUSE_Machine;
+import com.muldis.service_protocol_bridge_reference.MUSE_Value;
 
 import java.lang.reflect.InvocationTargetException;
 //import java.util.AbstractMap.SimpleImmutableEntry;

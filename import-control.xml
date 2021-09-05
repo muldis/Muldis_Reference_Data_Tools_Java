@@ -5,6 +5,11 @@
 
 <import-control pkg="com.muldis">
     <allow pkg="java"/>
+    <subpackage name="service_protocol_bridge_reference">
+    </subpackage>
+    <subpackage name="service_protocol_bridge_reference_test">
+        <allow pkg="org.junit.jupiter"/>
+    </subpackage>
     <subpackage name="data_engine_reference">
     </subpackage>
     <subpackage name="data_engine_reference_test">
@@ -13,7 +18,7 @@
             <allow pkg="com.muldis.data_engine_reference"/>
         </subpackage>
         <subpackage name="noncoupled">
-            <allow pkg="com.muldis.data_engine_reference_test.client"/>
+            <allow pkg="com.muldis.service_protocol_bridge_reference"/>
         </subpackage>
     </subpackage>
 </import-control>
