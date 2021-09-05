@@ -1,6 +1,5 @@
 package com.muldis.data_engine_reference_test.noncoupled;
 
-import com.muldis.service_protocol_bridge_reference.MUSE_Entrance;
 import com.muldis.service_protocol_bridge_reference.MUSE_Factory;
 import com.muldis.service_protocol_bridge_reference.MUSE_Machine;
 import com.muldis.service_protocol_bridge_reference.MUSE_Value;
@@ -19,8 +18,8 @@ public final class General_Test
 
     @Test
     public void should_just_work()
-        throws ClassNotFoundException, NoSuchMethodException,
-            InvocationTargetException, InstantiationException, IllegalAccessException
+        throws ClassNotFoundException, InstantiationException,
+            NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
         assertTrue(true);
 
@@ -32,8 +31,7 @@ public final class General_Test
                 + "=com.muldis.data_engine_reference.MUSE_Entrance or similar.");
         }
 
-        final MUSE_Factory factory
-            = MUSE_Entrance.new_MUSE_Factory(MUSE_server_entrance_class_name);
+        final MUSE_Factory factory = new MUSE_Factory(MUSE_server_entrance_class_name);
 
         final MUSE_Machine machine = factory.new_MUSE_Machine(requested_model_version);
 

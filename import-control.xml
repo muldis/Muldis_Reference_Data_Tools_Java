@@ -12,11 +12,13 @@
         <allow pkg="org.junit.jupiter"/>
     </subpackage>
     <subpackage name="service_protocol_bridge_reference">
+        <allow pkg="com.muldis.object_notation_validator"/>
     </subpackage>
     <subpackage name="service_protocol_bridge_reference_test">
         <allow pkg="org.junit.jupiter"/>
     </subpackage>
     <subpackage name="data_engine_reference">
+        <allow pkg="com.muldis.object_notation_validator"/>
     </subpackage>
     <subpackage name="data_engine_reference_test">
         <allow pkg="org.junit.jupiter"/>

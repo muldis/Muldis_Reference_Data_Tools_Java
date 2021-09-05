@@ -6,7 +6,6 @@ public final class MUSE_Value
 {
     public final MUSE_Machine MUSE_Machine;
 
-    @SuppressWarnings("checkstyle:VisibilityModifier")
     final MDL_Any memory_value;
 
     MUSE_Value(final MUSE_Machine machine, final MDL_Any memory_value)

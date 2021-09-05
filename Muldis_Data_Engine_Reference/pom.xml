@@ -20,6 +20,11 @@
     <dependencies>
         <dependency>
             <groupId>com.muldis</groupId>
+            <artifactId>muldis-object-notation-validator</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.muldis</groupId>
             <artifactId>muldis-service-protocol-bridge-reference</artifactId>
             <version>0.1</version>
             <scope>test</scope>

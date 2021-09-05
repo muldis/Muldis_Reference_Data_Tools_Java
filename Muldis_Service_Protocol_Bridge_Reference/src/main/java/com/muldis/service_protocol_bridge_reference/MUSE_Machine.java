@@ -1,13 +1,15 @@
 package com.muldis.service_protocol_bridge_reference;
 
+import com.muldis.object_notation_validator.Syntax_Java;
+
 import java.lang.reflect.InvocationTargetException;
 
 public final class MUSE_Machine
 {
-    public final MUSE_Factory MUSE_Factory;
+    private static final Syntax_Java MUON_HD_validator = new Syntax_Java();
 
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    Object server_machine;
+    public final MUSE_Factory MUSE_Factory;
+    final        Object       server_machine;
 
     MUSE_Machine(final MUSE_Factory factory, final Object server_machine)
     {
@@ -17,6 +19,11 @@ public final class MUSE_Machine
 
     public void provides_Muldis_Service_Protocol_Machine()
     {
+    }
+
+    public Boolean provides_MUSE_version(final Object requested_MUSE_version)
+    {
+        return this.MUSE_Factory.provides_MUSE_version(requested_MUSE_version);
     }
 
     public MUSE_Value MUSE_evaluate(final MUSE_Value function, final MUSE_Value args)
@@ -78,6 +85,11 @@ public final class MUSE_Machine
     public MUSE_Value MUSE_import(final Object value)
         throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
+        if (!MUON_HD_validator.is_MUON_artifact(value))
+        {
+            throw new IllegalArgumentException(
+                "Argument \"value\" must be a valid MUON Syntax_Java artifact.");
+        }
         return new MUSE_Value(this, this.server_machine.getClass()
             .getMethod("MUSE_import", Object.class)
             .invoke(this.server_machine, value));
