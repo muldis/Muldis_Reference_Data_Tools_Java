@@ -186,9 +186,7 @@
             <property name="sortImportsInGroupAlphabetically" value="true"/><!-- Factory is "false". -->
         </module>
         <module name="IllegalImport"/>
-        <module name="ImportControl">
-            <property name="file" value="import-control.xml"/><!-- Factory is null and it crashes. -->
-        </module>
+        <!-- Deliberately excluding module: <module name="ImportControl"/> -->
         <!-- Deliberately excluding module: <module name="ImportOrder"/> -->
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
