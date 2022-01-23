@@ -8,4 +8,4 @@ they are listed in dependency order:
 
 1. [Muldis Service Protocol Bridge Reference: Java (MUSEB)](Muldis_Service_Protocol_Bridge_Reference) - Reference implementation of MUSE client
 
-1. [Muldis Data Engine Reference: Java (MDE)](Muldis_Data_Engine_Reference) - Reference implementation of Muldis Data Language
+1. [Muldis Data Engine Reference: Java (MDE)](Muldis_Data_Engine_Reference) - Reference interpreter implementation of Muldis Data Language
