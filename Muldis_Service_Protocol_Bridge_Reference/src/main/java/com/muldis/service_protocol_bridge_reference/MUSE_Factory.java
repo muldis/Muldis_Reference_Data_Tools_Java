@@ -19,7 +19,7 @@ public final class MUSE_Factory
         final Class<?> server_entrance_class = Class.forName(MUSE_server_entrance_class_name);
         // This will throw InstantiationException if
         // an Entrance object can't be instantiated.
-        final Object server_entrance = server_entrance_class.newInstance();
+        final Object server_entrance = server_entrance_class.getConstructor().newInstance();
         // This will throw NoSuchMethodException if
         // the Entrance object doesn't declare it provides MUSE Entrance API.
         server_entrance_class.getMethod("provides_Muldis_Service_Protocol_Entrance");
