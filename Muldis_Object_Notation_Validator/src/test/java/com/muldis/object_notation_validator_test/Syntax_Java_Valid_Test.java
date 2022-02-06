@@ -119,12 +119,14 @@ public final class Syntax_Java_Valid_Test
     }
 
     @Test
+    @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void so_Bits()
     {
         final BitSet x = new BitSet();
     }
 
     @Test
+    @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void so_Blob()
     {
         final byte[] x = new byte[] {};
@@ -135,6 +137,7 @@ public final class Syntax_Java_Valid_Test
     }
 
     @Test
+    @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void so_Text()
     {
         final String s1 = "";
@@ -158,6 +161,7 @@ public final class Syntax_Java_Valid_Test
     }
 
     @Test
+    @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void so_Nesting()
     {
         final Object a = new SimpleImmutableEntry<String, Object>("Nesting", "person");

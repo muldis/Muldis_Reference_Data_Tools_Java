@@ -160,6 +160,7 @@
         <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
         <module name="UnnecessarySemicolonInEnumeration"/>
         <module name="UnnecessarySemicolonInTryWithResources"/>
+        <module name="UnusedLocalVariable"/>
         <!-- Deliberately excluding module: <module name="VariableDeclarationUsageDistance"/> -->
 
         <!-- IMPORTS -->
@@ -334,6 +335,7 @@
                 GENERIC_END, ELLIPSIS, LABELED_STAT, METHOD_REF,
             "/><!-- All tokens are chosen; factory is a proper subset of these. -->
         </module>
+        <module name="NoWhitespaceBeforeCaseDefaultColon"/>
         <module name="OperatorWrap">
             <property name="option" value="nl"/><!-- Factory is "nl". -->
             <property name="tokens" value="

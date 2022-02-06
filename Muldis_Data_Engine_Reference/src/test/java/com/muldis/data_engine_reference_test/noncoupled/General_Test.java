@@ -17,6 +17,7 @@ public final class General_Test
         = new String[] {"Muldis_Data_Language", "https://muldis.com", "0.300.0"};
 
     @Test
+    @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void should_just_work()
         throws ClassNotFoundException, InstantiationException,
             NoSuchMethodException, IllegalAccessException, InvocationTargetException

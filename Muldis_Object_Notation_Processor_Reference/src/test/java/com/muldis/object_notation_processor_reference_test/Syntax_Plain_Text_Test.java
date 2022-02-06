@@ -18,6 +18,7 @@ public final class Syntax_Plain_Text_Test
     }
 
     @Test
+    @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void it_should_work() throws IOException
     {
         final String source_code_file_name = "/overview.muon";
