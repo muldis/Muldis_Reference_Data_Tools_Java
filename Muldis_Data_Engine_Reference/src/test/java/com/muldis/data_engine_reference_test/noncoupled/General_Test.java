@@ -7,6 +7,7 @@ import com.muldis.service_protocol_bridge_reference.MUSE_Value;
 import java.lang.reflect.InvocationTargetException;
 //import java.util.AbstractMap.SimpleImmutableEntry;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +18,7 @@ public final class General_Test
         = new String[] {"Muldis_Data_Language", "https://muldis.com", "0.300.0"};
 
     @Test
+    @Disabled
     @SuppressWarnings("checkstyle:UnusedLocalVariable")
     public void should_just_work()
         throws ClassNotFoundException, InstantiationException,
