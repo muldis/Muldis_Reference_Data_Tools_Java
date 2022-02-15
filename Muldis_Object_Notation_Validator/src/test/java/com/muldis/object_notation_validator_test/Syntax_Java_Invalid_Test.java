@@ -23,7 +23,6 @@ public final class Syntax_Java_Invalid_Test
         assertFalse(v.is_MUON_artifact(new SimpleEntry<String, Object>("Ignorance", null)));
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     @Test
     public void not_Ignorance()
     {
@@ -41,7 +40,6 @@ public final class Syntax_Java_Invalid_Test
             "Ignorance", "0.0")));
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     @Test
     public void not_Boolean()
     {
@@ -64,7 +62,6 @@ public final class Syntax_Java_Invalid_Test
         assertFalse(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Boolean", "1.0")));
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     @Test
     public void not_Integer()
     {

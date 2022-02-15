@@ -42,7 +42,6 @@ public final class Syntax_Java_Valid_Test
         assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Boolean", true)));
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     @Test
     public void so_Integer()
     {
@@ -79,7 +78,6 @@ public final class Syntax_Java_Valid_Test
             "Integer", Long.MAX_VALUE)));
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     @Test
     public void so_Fraction()
     {

@@ -128,9 +128,7 @@
         <module name="IllegalTokenText"/>
         <module name="IllegalType"/>
         <module name="InnerAssignment"/>
-        <module name="MagicNumber">
-            <property name="ignoreNumbers" value="" /><!-- Factory is "-1,0,1,2". -->
-        </module>
+        <!-- Deliberately excluding module: <module name="MagicNumber"/> -->
         <!-- Deliberately excluding module: <module name="MatchXpath"/> -->
         <!-- Deliberately excluding module: <module name="MissingCtor"/> -->
         <module name="MissingSwitchDefault"/>

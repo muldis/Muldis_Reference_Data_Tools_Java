@@ -105,7 +105,6 @@ public final class Syntax_Java
         return value instanceof byte[];
     }
 
-    @SuppressWarnings("checkstyle:MagicNumber")
     private Boolean SYS_Text(final Object value)
     {
         if (!(value instanceof String))
