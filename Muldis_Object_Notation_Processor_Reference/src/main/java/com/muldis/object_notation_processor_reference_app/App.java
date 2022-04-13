@@ -1,5 +1,8 @@
 package com.muldis.object_notation_processor_reference_app;
 
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -141,12 +144,112 @@ public final class App
         );
     }
 
+    private static void process_file_or_dir_recursive(final Path path_in, final Path path_out)
+    {
+        // We expect that whatever calls this routine has already normalized the paths to absolute.
+        if (!path_in.isAbsolute())
+        {
+            throw new IllegalArgumentException("process_file_or_dir_recursive():"
+                + " invalid argument path_in: is not absolute path: " + path_in);
+        }
+        if (!path_out.isAbsolute())
+        {
+            throw new IllegalArgumentException("process_file_or_dir_recursive():"
+                + " invalid argument path_out: is not absolute path: " + path_out);
+        }
+        // For safety we want to ensure the input tree and output tree don't overlap.
+        // Logically this also means that neither of them can be the filesystem root.
+        if (path_in.startsWith(path_out) || path_out.startsWith(path_in))
+        {
+            System.out.println("Fatal: Can't input from file or dir at path " + path_in
+                + " or can't output to new file or dir at path " + path_out
+                + " because either those two paths are the same or one is contained in the other.");
+            return;
+        }
+        // We intentionally do not support following symbolic links for safety/simplicity reasons.
+        if (Files.isSymbolicLink(path_in))
+        {
+            System.out.println("Fatal: Can't input from file or dir at path " + path_in
+                + " because that is a symbolic link and we don't support following those.");
+            return;
+        }
+        if (Files.isSymbolicLink(path_out))
+        {
+            System.out.println("Fatal: Can't output to file or dir at path " + path_out
+                + " because that is a symbolic link and we don't support following those.");
+            return;
+        }
+        // Gracefully handle user-specified paths not existing, though we still have to later handle
+        // the case of it disappearing between this check and when we actually try to read it.
+        if (Files.notExists(path_in, LinkOption.NOFOLLOW_LINKS))
+        {
+            System.out.println("Fatal: Can't input from file or dir at path " + path_in
+                + " because no file or dir exists there.");
+            return;
+        }
+        // For safety we don't ever want to overwrite existing files or directories;
+        // if one wants to re-run a processing task they must remove previous run's output first,
+        // or include a date stamp in the output path that changes per run, or something.
+        if (Files.exists(path_out, LinkOption.NOFOLLOW_LINKS))
+        {
+            System.out.println("Fatal: Can't output to new file or dir at path " + path_out
+                + " because some other file or dir already exists there.");
+            return;
+        }
+        // For simplicity or to allow flexibility, we ignore whether or not input files are
+        // writable or executable or hidden, as that shouldn't matter to us, probably.
+        if (Files.isRegularFile(path_in, LinkOption.NOFOLLOW_LINKS))
+        {
+            System.out.println("TODO: Do the thing with regular file from "
+                + path_in + " to " + path_out);
+            // Gracefully handle user-specified paths not being readable to us, though we still have to
+            // later handle the case of us having lost the privilege when we actually try to read it.
+            if (!Files.isReadable(path_in))
+            {
+                System.out.println("Fatal: Can't input from existing regular file at path " + path_in
+                    + " because we lack read privileges for it.");
+                return;
+            }
+            return;
+        }
+        if (Files.isDirectory(path_in, LinkOption.NOFOLLOW_LINKS))
+        {
+            System.out.println("TODO: Do the thing with directory from "
+                + path_in + " to " + path_out);
+            // Gracefully handle user-specified paths not being readable to us, though we still have to
+            // later handle the case of us having lost the privilege when we actually try to read it.
+            if (!Files.isReadable(path_in))
+            {
+                System.out.println("Fatal: Can't input from existing dir at path " + path_in
+                    + " because we lack read privileges for it.");
+                return;
+            }
+            return;
+        }
+        throw new UnsupportedOperationException(
+            "process_file_or_dir_recursive(): unexpected situation;" + " path_in " + path_in
+                + " is neither a symbolic link or regular file or directory.");
+    }
+
     private static void task_analyze(final Map<App_Arg_Names, String> app_args)
     {
         System.out.println("This is task analyze.");
+        if (!app_args.containsKey(App_Arg_Names.in))
+        {
+            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.in);
+            return;
+        }
+        if (!app_args.containsKey(App_Arg_Names.out))
+        {
+            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.out);
+            return;
+        }
+        final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
+        final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
+        process_file_or_dir_recursive(path_in, path_out);
     }
 
-    private static void task_analyze_per_artifact()
+    private static void task_analyze_artifact()
     {
         System.out.println("This is task analyze.");
     }
