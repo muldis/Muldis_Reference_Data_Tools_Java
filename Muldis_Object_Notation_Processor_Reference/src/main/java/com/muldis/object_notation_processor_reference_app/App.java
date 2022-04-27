@@ -1,5 +1,11 @@
 package com.muldis.object_notation_processor_reference_app;
 
+import com.muldis.object_notation_processor_reference_util.processor.Analyze;
+import com.muldis.object_notation_processor_reference_util.processor.Processor;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -66,17 +72,9 @@ public final class App
             {
                 task_help();
             }
-            case analyze ->
+            case analyze, validate, format, textify, untextify, blobify, unblobify ->
             {
-                task_analyze(app_args);
-            }
-            case validate ->
-            {
-                task_validate(app_args);
-            }
-            case format ->
-            {
-                task_format(app_args);
+                generic_task_process(task, app_args);
             }
             default ->
             {
@@ -144,7 +142,34 @@ public final class App
         );
     }
 
-    private static void process_file_or_dir_recursive(final Path path_in, final Path path_out)
+    private static void generic_task_process(
+        final App_Tasks task, final Map<App_Arg_Names, String> app_args)
+    {
+        System.out.println("This is task " + task + ".");
+        @SuppressWarnings("checkstyle:Indentation")
+        final Processor processor = switch (task)
+        {
+            case analyze -> new Analyze();
+            default -> throw new UnsupportedOperationException(
+                "generic_task_process(): task " + task + " is not handled.");
+        };
+        if (!app_args.containsKey(App_Arg_Names.in))
+        {
+            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.in);
+            return;
+        }
+        if (!app_args.containsKey(App_Arg_Names.out))
+        {
+            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.out);
+            return;
+        }
+        final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
+        final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
+        process_file_or_dir_recursive(processor, path_in, path_out);
+    }
+
+    private static void process_file_or_dir_recursive(
+        final Processor processor, final Path path_in, final Path path_out)
     {
         // We expect that whatever calls this routine has already normalized the paths to absolute.
         if (!path_in.isAbsolute())
@@ -200,67 +225,48 @@ public final class App
         // writable or executable or hidden, as that shouldn't matter to us, probably.
         if (Files.isRegularFile(path_in, LinkOption.NOFOLLOW_LINKS))
         {
-            System.out.println("TODO: Do the thing with regular file from "
-                + path_in + " to " + path_out);
-            // Gracefully handle user-specified paths not being readable to us, though we still have to
-            // later handle the case of us having lost the privilege when we actually try to read it.
+            // Gracefully handle user-specified paths not being readable to us, we still have to
+            // later handle the case of us having lost privilege when we actually try to read it.
             if (!Files.isReadable(path_in))
             {
-                System.out.println("Fatal: Can't input from existing regular file at path " + path_in
-                    + " because we lack read privileges for it.");
+                System.out.println("Fatal: Can't input from existing regular file at path "
+                    + path_in + " because we lack read privileges for it.");
                 return;
             }
+            System.out.println("Starting the process from file at path "
+                + path_in + " to file at path " + path_out);
+            try (InputStream stream_in = Files.newInputStream(path_in);
+                OutputStream stream_out = Files.newOutputStream(path_out))
+            {
+                processor.process(stream_in, stream_out);
+            }
+            catch (final IOException e)
+            {
+                System.out.println("Fatal: An IOException occurred while attempting to process"
+                    + " from file at path " + path_in
+                    + " to file at path " + path_out + "; details: " + e);
+                return;
+            }
+            System.out.println("Finished the process from file at path "
+                + path_in + " to file at path " + path_out);
             return;
         }
         if (Files.isDirectory(path_in, LinkOption.NOFOLLOW_LINKS))
         {
             System.out.println("TODO: Do the thing with directory from "
                 + path_in + " to " + path_out);
-            // Gracefully handle user-specified paths not being readable to us, though we still have to
-            // later handle the case of us having lost the privilege when we actually try to read it.
+            // Gracefully handle user-specified paths not being readable to us, we still have to
+            // later handle the case of us having lost privilege when we actually try to read it.
             if (!Files.isReadable(path_in))
             {
-                System.out.println("Fatal: Can't input from existing dir at path " + path_in
-                    + " because we lack read privileges for it.");
+                System.out.println("Fatal: Can't input from existing dir at path "
+                    + path_in + " because we lack read privileges for it.");
                 return;
             }
             return;
         }
         throw new UnsupportedOperationException(
-            "process_file_or_dir_recursive(): unexpected situation;" + " path_in " + path_in
+            "process_file_or_dir_recursive(): unexpected situation; path_in " + path_in
                 + " is neither a symbolic link or regular file or directory.");
-    }
-
-    private static void task_analyze(final Map<App_Arg_Names, String> app_args)
-    {
-        System.out.println("This is task analyze.");
-        if (!app_args.containsKey(App_Arg_Names.in))
-        {
-            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.in);
-            return;
-        }
-        if (!app_args.containsKey(App_Arg_Names.out))
-        {
-            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.out);
-            return;
-        }
-        final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
-        final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
-        process_file_or_dir_recursive(path_in, path_out);
-    }
-
-    private static void task_analyze_artifact()
-    {
-        System.out.println("This is task analyze.");
-    }
-
-    private static void task_validate(final Map<App_Arg_Names, String> app_args)
-    {
-        System.out.println("This is task validate.");
-    }
-
-    private static void task_format(final Map<App_Arg_Names, String> app_args)
-    {
-        System.out.println("This is task format.");
     }
 }
