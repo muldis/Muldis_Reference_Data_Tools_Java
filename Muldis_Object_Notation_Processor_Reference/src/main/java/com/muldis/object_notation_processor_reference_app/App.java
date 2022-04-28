@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -221,6 +222,14 @@ public final class App
                 + " because some other file or dir already exists there.");
             return;
         }
+        // For simplicity we require that the immediate parent dir of the named output path
+        // already exists, and we will not be creating any nonexisting ancestor dirs.
+        if (Files.notExists(path_out.getParent(), LinkOption.NOFOLLOW_LINKS))
+        {
+            System.out.println("Fatal: Can't output to new file or dir at path " + path_out
+                + " because its parent dir " + path_out.getParent() + " doesn't exist.");
+            return;
+        }
         // For simplicity or to allow flexibility, we ignore whether or not input files are
         // writable or executable or hidden, as that shouldn't matter to us, probably.
         if (Files.isRegularFile(path_in, LinkOption.NOFOLLOW_LINKS))
@@ -235,8 +244,12 @@ public final class App
             }
             System.out.println("Starting the process from file at path "
                 + path_in + " to file at path " + path_out);
-            try (InputStream stream_in = Files.newInputStream(path_in);
-                OutputStream stream_out = Files.newOutputStream(path_out))
+            // Open existing file for input in octet streaming mode, should fail if doesn't exist.
+            // Open nonexisting file for output in octet streaming mode, fail if already exists.
+            try (InputStream stream_in = Files.newInputStream(path_in, LinkOption.NOFOLLOW_LINKS,
+                    StandardOpenOption.READ);
+                OutputStream stream_out = Files.newOutputStream(path_out, LinkOption.NOFOLLOW_LINKS,
+                    StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW))
             {
                 processor.process(stream_in, stream_out);
             }
