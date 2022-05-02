@@ -1,4 +1,4 @@
-package com.muldis.object_notation_processor_reference_util.processor;
+package com.muldis.object_notation_processor_reference_util;
 
 import java.io.IOException;
 import java.io.InputStream;

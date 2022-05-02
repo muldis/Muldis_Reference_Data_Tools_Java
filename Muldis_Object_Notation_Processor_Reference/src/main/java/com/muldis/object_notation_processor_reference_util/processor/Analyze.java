@@ -1,5 +1,7 @@
 package com.muldis.object_notation_processor_reference_util.processor;
 
+import com.muldis.object_notation_processor_reference_util.Processor;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
