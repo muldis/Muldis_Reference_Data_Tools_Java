@@ -6,6 +6,7 @@ import com.muldis.object_notation_processor_reference_util.processor.Processor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -264,10 +265,10 @@ public final class App
                 + path_in + " to file at path " + path_out);
             return;
         }
+        // For simplicity or to allow flexibility, we ignore whether or not input dirs are
+        // writable or executable or hidden, as that shouldn't matter to us, probably.
         if (Files.isDirectory(path_in, LinkOption.NOFOLLOW_LINKS))
         {
-            System.out.println("TODO: Do the thing with directory from "
-                + path_in + " to " + path_out);
             // Gracefully handle user-specified paths not being readable to us, we still have to
             // later handle the case of us having lost privilege when we actually try to read it.
             if (!Files.isReadable(path_in))
@@ -276,6 +277,44 @@ public final class App
                     + path_in + " because we lack read privileges for it.");
                 return;
             }
+            System.out.println("Starting the process from dir at path "
+                + path_in + " to dir at path " + path_out);
+            // Create nonexisting output directory, fail if already exists.
+            try
+            {
+                Files.createDirectory(path_out);
+            }
+            catch (final IOException e)
+            {
+                System.out.println("Fatal: An IOException occurred while attempting to create"
+                    + " output dir " + path_out + "; details: " + e);
+                return;
+            }
+            System.out.println("Created new empty output dir at path " + path_out);
+            // Iterate children of input dir and make corresponding children of output dir.
+            // Files.newDirectoryStream() does NOT include "." or ".." etc in child list.
+            try (DirectoryStream<Path> dir_stream_in = Files.newDirectoryStream(path_in))
+            {
+                // Each child_path_in is a fully-qualified absolute path of the child already.
+                for (final Path child_path_in: dir_stream_in)
+                {
+                    // Get the unqualified file name of the child, which is the last element.
+                    final Path child_common_unqualified_path = child_path_in.getFileName();
+                    // Append unqualified child file name to fully qualified path of output parent.
+                    final Path child_path_out = path_out.resolve(child_common_unqualified_path);
+                    // Recurse to actually process the child.
+                    process_file_or_dir_recursive(processor, child_path_in, child_path_out);
+                }
+            }
+            catch (final IOException e)
+            {
+                System.out.println("Fatal: An IOException occurred while attempting to process"
+                    + " from dir at path " + path_in
+                    + " to dir at path " + path_out + "; details: " + e);
+                return;
+            }
+            System.out.println("Finished the process from dir at path "
+                + path_in + " to dir at path " + path_out);
             return;
         }
         throw new UnsupportedOperationException(
