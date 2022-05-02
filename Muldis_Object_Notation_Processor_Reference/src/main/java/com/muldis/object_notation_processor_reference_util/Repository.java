@@ -11,8 +11,11 @@ import java.nio.file.StandardOpenOption;
 
 public final class Repository
 {
-    public Repository()
+    private final Logger logger;
+
+    public Repository(final Logger logger)
     {
+        this.logger = logger;
     }
 
     public void process_file_or_dir_recursive(
@@ -33,7 +36,7 @@ public final class Repository
         // Logically this also means that neither of them can be the filesystem root.
         if (path_in.startsWith(path_out) || path_out.startsWith(path_in))
         {
-            System.out.println("Fatal: Can't input from file or dir at path " + path_in
+            this.logger.failure("Fatal: Can't input from file or dir at path " + path_in
                 + " or can't output to new file or dir at path " + path_out
                 + " because either those two paths are the same or one is contained in the other.");
             return;
@@ -41,13 +44,13 @@ public final class Repository
         // We intentionally do not support following symbolic links for safety/simplicity reasons.
         if (Files.isSymbolicLink(path_in))
         {
-            System.out.println("Fatal: Can't input from file or dir at path " + path_in
+            this.logger.failure("Fatal: Can't input from file or dir at path " + path_in
                 + " because that is a symbolic link and we don't support following those.");
             return;
         }
         if (Files.isSymbolicLink(path_out))
         {
-            System.out.println("Fatal: Can't output to file or dir at path " + path_out
+            this.logger.failure("Fatal: Can't output to file or dir at path " + path_out
                 + " because that is a symbolic link and we don't support following those.");
             return;
         }
@@ -55,7 +58,7 @@ public final class Repository
         // the case of it disappearing between this check and when we actually try to read it.
         if (Files.notExists(path_in, LinkOption.NOFOLLOW_LINKS))
         {
-            System.out.println("Fatal: Can't input from file or dir at path " + path_in
+            this.logger.failure("Fatal: Can't input from file or dir at path " + path_in
                 + " because no file or dir exists there.");
             return;
         }
@@ -64,7 +67,7 @@ public final class Repository
         // or include a date stamp in the output path that changes per run, or something.
         if (Files.exists(path_out, LinkOption.NOFOLLOW_LINKS))
         {
-            System.out.println("Fatal: Can't output to new file or dir at path " + path_out
+            this.logger.failure("Fatal: Can't output to new file or dir at path " + path_out
                 + " because some other file or dir already exists there.");
             return;
         }
@@ -72,7 +75,7 @@ public final class Repository
         // already exists, and we will not be creating any nonexisting ancestor dirs.
         if (Files.notExists(path_out.getParent(), LinkOption.NOFOLLOW_LINKS))
         {
-            System.out.println("Fatal: Can't output to new file or dir at path " + path_out
+            this.logger.failure("Fatal: Can't output to new file or dir at path " + path_out
                 + " because its parent dir " + path_out.getParent() + " doesn't exist.");
             return;
         }
@@ -84,11 +87,11 @@ public final class Repository
             // later handle the case of us having lost privilege when we actually try to read it.
             if (!Files.isReadable(path_in))
             {
-                System.out.println("Fatal: Can't input from existing regular file at path "
+                this.logger.failure("Fatal: Can't input from existing regular file at path "
                     + path_in + " because we lack read privileges for it.");
                 return;
             }
-            System.out.println("Starting the process from file at path "
+            this.logger.notice("Starting the process from file at path "
                 + path_in + " to file at path " + path_out);
             // Open existing file for input in octet streaming mode, should fail if doesn't exist.
             // Open nonexisting file for output in octet streaming mode, fail if already exists.
@@ -101,12 +104,12 @@ public final class Repository
             }
             catch (final IOException e)
             {
-                System.out.println("Fatal: An IOException occurred while attempting to process"
+                this.logger.failure("Fatal: An IOException occurred while attempting to process"
                     + " from file at path " + path_in
                     + " to file at path " + path_out + "; details: " + e);
                 return;
             }
-            System.out.println("Finished the process from file at path "
+            this.logger.notice("Finished the process from file at path "
                 + path_in + " to file at path " + path_out);
             return;
         }
@@ -118,11 +121,11 @@ public final class Repository
             // later handle the case of us having lost privilege when we actually try to read it.
             if (!Files.isReadable(path_in))
             {
-                System.out.println("Fatal: Can't input from existing dir at path "
+                this.logger.failure("Fatal: Can't input from existing dir at path "
                     + path_in + " because we lack read privileges for it.");
                 return;
             }
-            System.out.println("Starting the process from dir at path "
+            this.logger.notice("Starting the process from dir at path "
                 + path_in + " to dir at path " + path_out);
             // Create nonexisting output directory, fail if already exists.
             try
@@ -131,11 +134,11 @@ public final class Repository
             }
             catch (final IOException e)
             {
-                System.out.println("Fatal: An IOException occurred while attempting to create"
+                this.logger.failure("Fatal: An IOException occurred while attempting to create"
                     + " output dir " + path_out + "; details: " + e);
                 return;
             }
-            System.out.println("Created new empty output dir at path " + path_out);
+            this.logger.notice("Created new empty output dir at path " + path_out);
             // Iterate children of input dir and make corresponding children of output dir.
             // Files.newDirectoryStream() does NOT include "." or ".." etc in child list.
             try (DirectoryStream<Path> dir_stream_in = Files.newDirectoryStream(path_in))
@@ -153,12 +156,12 @@ public final class Repository
             }
             catch (final IOException e)
             {
-                System.out.println("Fatal: An IOException occurred while attempting to process"
+                this.logger.failure("Fatal: An IOException occurred while attempting to process"
                     + " from dir at path " + path_in
                     + " to dir at path " + path_out + "; details: " + e);
                 return;
             }
-            System.out.println("Finished the process from dir at path "
+            this.logger.notice("Finished the process from dir at path "
                 + path_in + " to dir at path " + path_out);
             return;
         }

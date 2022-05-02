@@ -1,11 +1,13 @@
 package com.muldis.object_notation_processor_reference_app;
 
+import com.muldis.object_notation_processor_reference_util.Logger;
 import com.muldis.object_notation_processor_reference_util.Processor;
 import com.muldis.object_notation_processor_reference_util.Repository;
 import com.muldis.object_notation_processor_reference_util.processor.Analyze;
 
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class App
@@ -15,7 +17,8 @@ public final class App
         task,
         in,
         out,
-        enc
+        enc,
+        verbose,
     }
 
     private enum App_Tasks
@@ -28,10 +31,8 @@ public final class App
         textify,
         untextify,
         blobify,
-        unblobify
+        unblobify,
     }
-
-    private static final Repository repository = new Repository();
 
     private App()
     {
@@ -84,21 +85,33 @@ public final class App
     private static Map<App_Arg_Names, String> normalize_app_args(final String[] raw_app_args)
     {
         // The "task" arg is expected to be positional, and the others named.
-        // A positional arg does NOT start with "--", a named looks like "--foo=bar".
+        // A positional arg does NOT start with "--", a named looks like "--foo=bar" or "--foo".
         final Map<App_Arg_Names, String> app_args = new HashMap<>();
         if (raw_app_args.length > 0 && !raw_app_args[0].startsWith("--"))
         {
             for (int i = 1; i < raw_app_args.length; i++)
             {
                 final String raw_app_arg = raw_app_args[i];
-                if (raw_app_arg.startsWith("--") && raw_app_arg.contains("="))
+                if (raw_app_arg.startsWith("--"))
                 {
-                    final int eq_pos = raw_app_arg.indexOf("=");
-                    final String arg_name = raw_app_arg.substring(2, eq_pos);
+                    final String arg_name;
+                    final String arg_value;
+                    if (raw_app_arg.contains("="))
+                    {
+                        // Named arg format "--foo=bar", the most generic format.
+                        final int eq_pos = raw_app_arg.indexOf("=");
+                        arg_name = raw_app_arg.substring(2, eq_pos);
+                        arg_value = raw_app_arg.substring(eq_pos + 1);
+                    }
+                    else
+                    {
+                        // Named arg format "--foo", a boolean where present is true, absent false.
+                        arg_name = raw_app_arg.substring(2);
+                        arg_value = null;
+                    }
                     try
                     {
-                        app_args.put(App_Arg_Names.valueOf(arg_name),
-                            raw_app_arg.substring(eq_pos + 1));
+                        app_args.put(App_Arg_Names.valueOf(arg_name), arg_value);
                     }
                     catch (final IllegalArgumentException e)
                     {
@@ -123,21 +136,19 @@ public final class App
     private static void task_help()
     {
         final String APP_NAME = "sh muonp.sh";
-        final String ARG_IN  = "--in=<input file or directory path>";
-        final String ARG_OUT = "--out=<output file or directory path>";
-        final String ARG_ENC = "--enc=<output character encoding name>";
-        System.out.println(
-            "Usage:\n"
-                + "  " + APP_NAME + " version\n"
-                + "  " + APP_NAME + " help\n"
-                + "  " + APP_NAME + " analyze "   + ARG_IN + " " + ARG_OUT + " " + ARG_ENC + "\n"
-                + "  " + APP_NAME + " validate "  + ARG_IN + " " + ARG_OUT + " " + ARG_ENC + "\n"
-                + "  " + APP_NAME + " format "    + ARG_IN + " " + ARG_OUT + " " + ARG_ENC + "\n"
-                + "  " + APP_NAME + " textify "   + ARG_IN + " " + ARG_OUT + " " + ARG_ENC + "\n"
-                + "  " + APP_NAME + " untextify " + ARG_IN + " " + ARG_OUT + " " + ARG_ENC + "\n"
-                + "  " + APP_NAME + " blobify "   + ARG_IN + " " + ARG_OUT + " " + ARG_ENC + "\n"
-                + "  " + APP_NAME + " unblobify " + ARG_IN + " " + ARG_OUT + " " + ARG_ENC + "\n"
-        );
+        System.out.println("Usage:");
+        System.out.println("  " + APP_NAME + " version");
+        System.out.println("  " + APP_NAME + " help");
+        for (final String generic_task: List.of("analyze", "validate", "format",
+            "textify", "untextify", "blobify", "unblobify"))
+        {
+            System.out.println("  " + APP_NAME + " " + generic_task
+                + " --verbose"
+                + " --in=<input file or directory path>"
+                + " --out=<output file or directory path>"
+                + " --enc=<output character encoding name>"
+            );
+        }
     }
 
     private static void generic_task_process(
@@ -163,6 +174,9 @@ public final class App
         }
         final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
         final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
+        final boolean verbose = app_args.containsKey(App_Arg_Names.verbose);
+        final Logger logger = new Logger(System.out, verbose ? System.out : null);
+        final Repository repository = new Repository(logger);
         repository.process_file_or_dir_recursive(processor, path_in, path_out);
     }
 }
