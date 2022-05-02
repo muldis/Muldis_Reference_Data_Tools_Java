@@ -19,7 +19,7 @@ public final class Repository
     }
 
     public void process_file_or_dir_recursive(
-        final Processor processor, final Path path_in, final Path path_out)
+        final Processor processor, final Path path_in, final Path path_out, final String encoding)
     {
         // We expect that whatever calls this routine has already normalized the paths to absolute.
         if (!path_in.isAbsolute())
@@ -100,7 +100,7 @@ public final class Repository
                 OutputStream stream_out = Files.newOutputStream(path_out, LinkOption.NOFOLLOW_LINKS,
                     StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW))
             {
-                processor.process(stream_in, stream_out);
+                processor.process(stream_in, stream_out, encoding);
             }
             catch (final IOException e)
             {
@@ -151,7 +151,8 @@ public final class Repository
                     // Append unqualified child file name to fully qualified path of output parent.
                     final Path child_path_out = path_out.resolve(child_common_unqualified_path);
                     // Recurse to actually process the child.
-                    process_file_or_dir_recursive(processor, child_path_in, child_path_out);
+                    process_file_or_dir_recursive(
+                        processor, child_path_in, child_path_out, encoding);
                 }
             }
             catch (final IOException e)

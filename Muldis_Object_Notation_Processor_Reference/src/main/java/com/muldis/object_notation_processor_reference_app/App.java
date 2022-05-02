@@ -15,10 +15,10 @@ public final class App
     private enum App_Arg_Names
     {
         task,
+        verbose,
         in,
         out,
         enc,
-        verbose,
     }
 
     private enum App_Tasks
@@ -162,21 +162,22 @@ public final class App
             default -> throw new UnsupportedOperationException(
                 "generic_task_process(): task " + task + " is not handled.");
         };
+        final boolean verbose = app_args.containsKey(App_Arg_Names.verbose);
         if (!app_args.containsKey(App_Arg_Names.in))
         {
             System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.in);
             return;
         }
+        final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
         if (!app_args.containsKey(App_Arg_Names.out))
         {
             System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.out);
             return;
         }
-        final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
         final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
-        final boolean verbose = app_args.containsKey(App_Arg_Names.verbose);
+        final String encoding = app_args.get(App_Arg_Names.enc);
         final Logger logger = new Logger(System.out, verbose ? System.out : null);
         final Repository repository = new Repository(logger);
-        repository.process_file_or_dir_recursive(processor, path_in, path_out);
+        repository.process_file_or_dir_recursive(processor, path_in, path_out, encoding);
     }
 }
