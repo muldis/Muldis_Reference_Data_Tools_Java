@@ -16,6 +16,7 @@ public final class App
     {
         task,
         verbose,
+        resume,
         in,
         out,
         enc,
@@ -144,6 +145,7 @@ public final class App
         {
             System.out.println("  " + APP_NAME + " " + generic_task
                 + " --verbose"
+                + " --resume"
                 + " --in=<input file or directory path>"
                 + " --out=<output file or directory path>"
                 + " --enc=<output character encoding name>"
@@ -163,6 +165,7 @@ public final class App
                 "generic_task_process(): task " + task + " is not handled.");
         };
         final boolean verbose = app_args.containsKey(App_Arg_Names.verbose);
+        final Boolean resume_when_failure = app_args.containsKey(App_Arg_Names.resume);
         if (!app_args.containsKey(App_Arg_Names.in))
         {
             System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.in);
@@ -178,6 +181,7 @@ public final class App
         final String encoding = app_args.get(App_Arg_Names.enc);
         final Logger logger = new Logger(System.out, verbose ? System.out : null);
         final Repository repository = new Repository(logger);
-        repository.process_file_or_dir_recursive(processor, path_in, path_out, encoding);
+        repository.process_file_or_dir_recursive(
+            processor, path_in, path_out, encoding, resume_when_failure);
     }
 }
