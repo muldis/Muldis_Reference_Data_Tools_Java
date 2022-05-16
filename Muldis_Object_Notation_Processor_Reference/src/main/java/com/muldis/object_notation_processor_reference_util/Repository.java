@@ -32,8 +32,10 @@ public final class Repository
         final Processor processor,
         final Path path_in,
         final Path path_out,
-        final String encoding,
-        final Boolean resume_when_failure)
+        final String encoding_in,
+        final String encoding_out,
+        final Boolean resume_when_failure
+    )
     {
         // We expect that whatever calls this routine has already normalized the paths to absolute.
         if (!path_in.isAbsolute())
@@ -114,7 +116,7 @@ public final class Repository
                 OutputStream stream_out = Files.newOutputStream(path_out, LinkOption.NOFOLLOW_LINKS,
                     StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW))
             {
-                processor.process(stream_in, stream_out, encoding);
+                processor.process(stream_in, stream_out, encoding_in, encoding_out);
             }
             catch (final IOException e)
             {
@@ -166,7 +168,8 @@ public final class Repository
                     final Path child_path_out = path_out.resolve(child_common_unqualified_path);
                     // Recurse to actually process the child.
                     final Boolean was_child_success = process_file_or_dir_recursive(
-                        processor, child_path_in, child_path_out, encoding, resume_when_failure);
+                        processor, child_path_in, child_path_out,
+                        encoding_in, encoding_out, resume_when_failure);
                     // If we should abort all processing as soon as any child node fails, do so.
                     if (!was_child_success && !resume_when_failure)
                     {

@@ -13,7 +13,11 @@ public final class Analyze implements Processor
     }
 
     public void process(
-        final InputStream stream_in, final OutputStream stream_out, final String encoding)
+        final InputStream stream_in,
+        final OutputStream stream_out,
+        final String encoding_in,
+        final String encoding_out
+    )
         throws IOException
     {
         // InputStream.read() returns one of 0..255 when there is another octet

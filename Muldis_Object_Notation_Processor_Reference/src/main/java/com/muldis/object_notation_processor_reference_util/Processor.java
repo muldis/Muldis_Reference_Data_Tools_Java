@@ -6,6 +6,11 @@ import java.io.OutputStream;
 
 public interface Processor
 {
-    void process(InputStream stream_in, OutputStream stream_out, String encoding)
+    void process(
+        InputStream stream_in,
+        OutputStream stream_out,
+        String encoding_in,
+        String encoding_out
+    )
         throws IOException;
 }

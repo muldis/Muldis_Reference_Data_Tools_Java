@@ -19,7 +19,8 @@ public final class App
         resume,
         in,
         out,
-        enc,
+        enc_in,
+        enc_out,
     }
 
     private enum App_Tasks
@@ -144,11 +145,12 @@ public final class App
             "textify", "untextify", "blobify", "unblobify"))
         {
             System.out.println("  " + APP_NAME + " " + generic_task
-                + " --verbose"
-                + " --resume"
+                + " [--verbose]"
+                + " [--resume]"
                 + " --in=<input file or directory path>"
                 + " --out=<output file or directory path>"
-                + " --enc=<output character encoding name>"
+                + " [--enc_in=<input character encoding name>]"
+                + " [--enc_out=<output character encoding name>]"
             );
         }
     }
@@ -178,10 +180,11 @@ public final class App
             return;
         }
         final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
-        final String encoding = app_args.get(App_Arg_Names.enc);
+        final String encoding_in = app_args.get(App_Arg_Names.enc_in);
+        final String encoding_out = app_args.get(App_Arg_Names.enc_out);
         final Logger logger = new Logger(System.out, verbose ? System.out : null);
         final Repository repository = new Repository(logger);
         repository.process_file_or_dir_recursive(
-            processor, path_in, path_out, encoding, resume_when_failure);
+            processor, path_in, path_out, encoding_in, encoding_out, resume_when_failure);
     }
 }
