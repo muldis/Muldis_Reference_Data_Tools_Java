@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public final class Analyze implements Processor
+public final class Duplicate implements Processor
 {
-    public Analyze()
+    public Duplicate()
     {
     }
 

@@ -3,7 +3,7 @@ package com.muldis.object_notation_processor_reference_app;
 import com.muldis.object_notation_processor_reference_util.Logger;
 import com.muldis.object_notation_processor_reference_util.Processor;
 import com.muldis.object_notation_processor_reference_util.Repository;
-import com.muldis.object_notation_processor_reference_util.processor.Analyze;
+import com.muldis.object_notation_processor_reference_util.processor.Duplicate;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -25,6 +25,7 @@ public final class App
     {
         version,
         help,
+        duplicate,
         analyze,
         validate,
         format,
@@ -71,7 +72,7 @@ public final class App
             {
                 task_help();
             }
-            case analyze, validate, format, textify, untextify, blobify, unblobify ->
+            case duplicate, analyze, validate, format, textify, untextify, blobify, unblobify ->
             {
                 generic_task_process(task, app_args);
             }
@@ -139,7 +140,7 @@ public final class App
         System.out.println("Usage:");
         System.out.println("  " + APP_NAME + " version");
         System.out.println("  " + APP_NAME + " help");
-        for (final String generic_task: List.of("analyze", "validate", "format",
+        for (final String generic_task: List.of("duplicate", "analyze", "validate", "format",
             "textify", "untextify", "blobify", "unblobify"))
         {
             System.out.println("  " + APP_NAME + " " + generic_task
@@ -158,7 +159,7 @@ public final class App
         @SuppressWarnings("checkstyle:Indentation")
         final Processor processor = switch (task)
         {
-            case analyze -> new Analyze();
+            case duplicate -> new Duplicate();
             default -> throw new UnsupportedOperationException(
                 "generic_task_process(): task " + task + " is not handled.");
         };
@@ -166,13 +167,13 @@ public final class App
         final Boolean resume_when_failure = app_args.containsKey(App_Arg_Names.resume);
         if (!app_args.containsKey(App_Arg_Names.in))
         {
-            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.in);
+            System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Names.in);
             return;
         }
         final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
         if (!app_args.containsKey(App_Arg_Names.out))
         {
-            System.out.println("Fatal: Task analyze: Missing argument: " + App_Arg_Names.out);
+            System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Names.out);
             return;
         }
         final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
