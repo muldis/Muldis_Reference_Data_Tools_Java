@@ -2,7 +2,10 @@ package com.muldis.object_notation_processor_reference_util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -32,6 +35,8 @@ public final class Repository
         final Processor processor,
         final Path path_in,
         final Path path_out,
+        final Boolean each_file_all_at_once,
+        final Boolean each_file_as_text,
         final Boolean resume_when_failure
     )
     {
@@ -109,12 +114,71 @@ public final class Repository
                 + path_in + " to file at path " + path_out);
             // Open existing file for input in octet streaming mode, should fail if doesn't exist.
             // Open nonexisting file for output in octet streaming mode, fail if already exists.
-            try (InputStream stream_in = Files.newInputStream(path_in, LinkOption.NOFOLLOW_LINKS,
-                    StandardOpenOption.READ);
-                OutputStream stream_out = Files.newOutputStream(path_out, LinkOption.NOFOLLOW_LINKS,
+            try (InputStream blob_stream_in = Files.newInputStream(path_in,
+                    LinkOption.NOFOLLOW_LINKS, StandardOpenOption.READ);
+                OutputStream blob_stream_out = Files.newOutputStream(path_out,
+                    LinkOption.NOFOLLOW_LINKS,
                     StandardOpenOption.WRITE, StandardOpenOption.CREATE_NEW))
             {
-                processor.process(stream_in, stream_out);
+                if (each_file_all_at_once)
+                {
+                    // Read entire input file from storage to memory first,
+                    // then process it from memory to memory,
+                    // then write entire output file from memory to storage.
+                    // This will fail during the initial read for any file larger than about 1-2GB
+                    // due to such being the limit of what a single Java byte[] or String can hold.
+                    if (each_file_as_text)
+                    {
+                        this.logger.notice("Using method process_text_at_once().");
+                        blob_stream_out.write(processor
+                            .process_text_at_once(
+                                new String(blob_stream_in.readAllBytes(), StandardCharsets.UTF_8))
+                            .getBytes(StandardCharsets.UTF_8));
+                    }
+                    else
+                    {
+                        this.logger.notice("Using method process_blob_at_once().");
+                        blob_stream_out.write(
+                            processor.process_blob_at_once(blob_stream_in.readAllBytes()));
+                    }
+                }
+                else
+                {
+                    // Read input file from storage to memory one octet or one Java char
+                    // (up to 3 UTF-8 octets) at a time, each processor may or may not read entire
+                    // input file before writing output file from memory to storage, each processor
+                    // may or may not keep all internal working data for a task in memory at once.
+                    // This will theoretically be able to handle files of any size, but actual
+                    // limits would depend on the processor rather than Java's ability to store an
+                    // entire file in a single byte[] or String value.
+                    if (each_file_as_text)
+                    {
+                        try (InputStreamReader text_stream_in
+                                = new InputStreamReader(blob_stream_in, StandardCharsets.UTF_8);
+                            OutputStreamWriter text_stream_out
+                                = new OutputStreamWriter(blob_stream_out, StandardCharsets.UTF_8))
+                        {
+                            this.logger.notice("Using method process_text_stream().");
+                            // Note that InputStreamReader.read()
+                            // returns one of 0..0xFFFF when there is another Java char
+                            // and it returns -1 when there is none / the end of stream was passed.
+                            processor.process_text_stream(text_stream_in, text_stream_out);
+                        }
+                        catch (final IOException e)
+                        {
+                            // So next level out of catch block can see and report on this failure.
+                            throw e;
+                        }
+                    }
+                    else
+                    {
+                        this.logger.notice("Using method process_blob_stream().");
+                        // Note that InputStream.read()
+                        // returns one of 0..255 when there is another octet
+                        // and it returns -1 when there is none / the end of stream was passed.
+                        processor.process_blob_stream(blob_stream_in, blob_stream_out);
+                    }
+                }
             }
             catch (final IOException e)
             {
@@ -166,7 +230,8 @@ public final class Repository
                     final Path child_path_out = path_out.resolve(child_common_unqualified_path);
                     // Recurse to actually process the child.
                     final Boolean was_child_success = process_file_or_dir_recursive(
-                        processor, child_path_in, child_path_out, resume_when_failure);
+                        processor, child_path_in, child_path_out,
+                        each_file_all_at_once, each_file_as_text, resume_when_failure);
                     // If we should abort all processing as soon as any child node fails, do so.
                     if (!was_child_success && !resume_when_failure)
                     {
