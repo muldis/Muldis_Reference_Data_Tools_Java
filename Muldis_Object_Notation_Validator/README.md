@@ -17,7 +17,7 @@ Darren Duncan - darren@DarrenDuncan.net
 
 # LICENSE AND COPYRIGHT
 
-**Muldis Object Notation Validator: Java** (MUONV) is Copyright © 2020-2022, Muldis Data Systems, Inc.
+**Muldis Object Notation Validator: Java** (MUONV) is Copyright © 2020-2023, Muldis Data Systems, Inc.
 
 <https://muldis.com>
 
