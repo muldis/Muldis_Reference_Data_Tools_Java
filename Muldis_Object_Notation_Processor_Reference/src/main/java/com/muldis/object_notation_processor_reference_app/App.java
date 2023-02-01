@@ -17,8 +17,6 @@ public final class App
         task,
         verbose,
         resume,
-        all_at_once,
-        as_text,
         in,
         out,
     }
@@ -148,8 +146,6 @@ public final class App
             System.out.println("  " + APP_NAME + " " + generic_task
                 + " [--verbose]"
                 + " [--resume]"
-                + " [--all_at_once]"
-                + " [--as_text]"
                 + " --in=<input file or directory path>"
                 + " --out=<output file or directory path>"
             );
@@ -169,8 +165,6 @@ public final class App
         };
         final Boolean verbose = app_args.containsKey(App_Arg_Names.verbose);
         final Boolean resume_when_failure = app_args.containsKey(App_Arg_Names.resume);
-        final Boolean each_file_all_at_once = app_args.containsKey(App_Arg_Names.all_at_once);
-        final Boolean each_file_as_text = app_args.containsKey(App_Arg_Names.as_text);
         if (!app_args.containsKey(App_Arg_Names.in))
         {
             System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Names.in);
@@ -185,7 +179,6 @@ public final class App
         final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
         final Logger logger = new Logger(System.out, verbose ? System.out : null);
         final Repository repository = new Repository(logger);
-        repository.process_file_or_dir_recursive(processor, path_in, path_out,
-            each_file_all_at_once, each_file_as_text, resume_when_failure);
+        repository.process_file_or_dir_recursive(processor, path_in, path_out, resume_when_failure);
     }
 }
