@@ -17,7 +17,7 @@ Darren Duncan - darren@DarrenDuncan.net
 
 # LICENSE AND COPYRIGHT
 
-**Muldis Object Notation Processor Reference: Java** (MUONP) is Copyright © 2020-2023, Muldis Data Systems, Inc.
+**Muldis Object Notation Processor Reference: Java** (MUONP) is Copyright © 2015-2023, Muldis Data Systems, Inc.
 
 <https://muldis.com>
 

@@ -17,7 +17,7 @@ Darren Duncan - darren@DarrenDuncan.net
 
 # LICENSE AND COPYRIGHT
 
-**Muldis Data Engine Reference: Java** (MDE) is Copyright © 2020-2023, Muldis Data Systems, Inc.
+**Muldis Data Engine Reference: Java** (MDE) is Copyright © 2015-2023, Muldis Data Systems, Inc.
 
 <https://muldis.com>
 
