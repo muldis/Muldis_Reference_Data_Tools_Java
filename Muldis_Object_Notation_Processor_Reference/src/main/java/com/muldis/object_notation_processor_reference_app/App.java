@@ -12,7 +12,7 @@ import java.util.Map;
 
 public final class App
 {
-    private enum App_Arg_Names
+    private enum App_Arg_Name
     {
         task,
         verbose,
@@ -21,7 +21,7 @@ public final class App
         out,
     }
 
-    private enum App_Tasks
+    private enum App_Task
     {
         version,
         help,
@@ -43,22 +43,22 @@ public final class App
     public static void main(final String[] raw_app_args)
     {
         task_version();
-        final Map<App_Arg_Names, String> app_args = normalize_app_args(raw_app_args);
+        final Map<App_Arg_Name, String> app_args = normalize_app_args(raw_app_args);
         if (app_args.isEmpty())
         {
             System.out.println("Fatal: Task-naming primary app argument is missing.");
             task_help();
             return;
         }
-        final App_Tasks task;
+        final App_Task task;
         try
         {
-            task = App_Tasks.valueOf(app_args.get(App_Arg_Names.task));
+            task = App_Task.valueOf(app_args.get(App_Arg_Name.task));
         }
         catch (final IllegalArgumentException e)
         {
-            // App_Tasks.valueOf() throws IllegalArgumentException if task arg doesn't match member.
-            System.out.println("Fatal: Unrecognized task: " + app_args.get(App_Arg_Names.task));
+            // App_Task.valueOf() throws IllegalArgumentException if task arg doesn't match member.
+            System.out.println("Fatal: Unrecognized task: " + app_args.get(App_Arg_Name.task));
             task_help();
             return;
         }
@@ -83,11 +83,11 @@ public final class App
         }
     }
 
-    private static Map<App_Arg_Names, String> normalize_app_args(final String[] raw_app_args)
+    private static Map<App_Arg_Name, String> normalize_app_args(final String[] raw_app_args)
     {
         // The "task" arg is expected to be positional, and the others named.
         // A positional arg does NOT start with "--", a named looks like "--foo=bar" or "--foo".
-        final Map<App_Arg_Names, String> app_args = new HashMap<>();
+        final Map<App_Arg_Name, String> app_args = new HashMap<>();
         if (raw_app_args.length > 0 && !raw_app_args[0].startsWith("--"))
         {
             for (int i = 1; i < raw_app_args.length; i++)
@@ -112,18 +112,18 @@ public final class App
                     }
                     try
                     {
-                        app_args.put(App_Arg_Names.valueOf(arg_name), arg_value);
+                        app_args.put(App_Arg_Name.valueOf(arg_name), arg_value);
                     }
                     catch (final IllegalArgumentException e)
                     {
-                        // App_Arg_Names.valueOf() throws IllegalArgumentException
+                        // App_Arg_Name.valueOf() throws IllegalArgumentException
                         // if arg name doesn't match member.
                         System.out.println("Warning: Ignoring unrecognized argument: " + arg_name);
                     }
                 }
             }
             // Assign the positional "task" last so it takes precedence over any named one.
-            app_args.put(App_Arg_Names.task, raw_app_args[0]);
+            app_args.put(App_Arg_Name.task, raw_app_args[0]);
         }
         return app_args;
     }
@@ -153,7 +153,7 @@ public final class App
     }
 
     private static void generic_task_process(
-        final App_Tasks task, final Map<App_Arg_Names, String> app_args)
+        final App_Task task, final Map<App_Arg_Name, String> app_args)
     {
         System.out.println("This is task " + task + ".");
         @SuppressWarnings("checkstyle:Indentation")
@@ -163,20 +163,20 @@ public final class App
             default -> throw new UnsupportedOperationException(
                 "generic_task_process(): task " + task + " is not handled.");
         };
-        final Boolean verbose = app_args.containsKey(App_Arg_Names.verbose);
-        final Boolean resume_when_failure = app_args.containsKey(App_Arg_Names.resume);
-        if (!app_args.containsKey(App_Arg_Names.in))
+        final Boolean verbose = app_args.containsKey(App_Arg_Name.verbose);
+        final Boolean resume_when_failure = app_args.containsKey(App_Arg_Name.resume);
+        if (!app_args.containsKey(App_Arg_Name.in))
         {
-            System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Names.in);
+            System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Name.in);
             return;
         }
-        final Path path_in = Path.of(app_args.get(App_Arg_Names.in)).toAbsolutePath();
-        if (!app_args.containsKey(App_Arg_Names.out))
+        final Path path_in = Path.of(app_args.get(App_Arg_Name.in)).toAbsolutePath();
+        if (!app_args.containsKey(App_Arg_Name.out))
         {
-            System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Names.out);
+            System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Name.out);
             return;
         }
-        final Path path_out = Path.of(app_args.get(App_Arg_Names.out)).toAbsolutePath();
+        final Path path_out = Path.of(app_args.get(App_Arg_Name.out)).toAbsolutePath();
         final Logger logger = new Logger(System.out, verbose ? System.out : null);
         final Repository repository = new Repository(logger);
         repository.process_file_or_dir_recursive(processor, path_in, path_out, resume_when_failure);
