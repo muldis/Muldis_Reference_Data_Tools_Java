@@ -43,7 +43,7 @@ public final class App
     public static void main(final String[] raw_app_args)
     {
         task_version();
-        final Map<App_Arg_Name, String> app_args = normalize_app_args(raw_app_args);
+        final Map<App_Arg_Name, String> app_args = normalized_app_args(raw_app_args);
         if (app_args.isEmpty())
         {
             System.out.println("Fatal: Task-naming primary app argument is missing.");
@@ -83,7 +83,7 @@ public final class App
         }
     }
 
-    private static Map<App_Arg_Name, String> normalize_app_args(final String[] raw_app_args)
+    private static Map<App_Arg_Name, String> normalized_app_args(final String[] raw_app_args)
     {
         // The "task" arg is expected to be positional, and the others named.
         // A positional arg does NOT start with "--", a named looks like "--foo=bar" or "--foo".
