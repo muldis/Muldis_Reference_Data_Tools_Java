@@ -28,12 +28,8 @@ public final class Repository
     // node fails to be processed (false argument), or if it attempts to keep going and process the
     // remainder of the nodes (true argument).
     @SuppressWarnings("checkstyle:MethodLength")
-    public Boolean process_file_or_dir_recursive(
-        final Processor processor,
-        final Path path_in,
-        final Path path_out,
-        final Boolean resume_when_failure
-    )
+    public Boolean process_file_or_dir_recursive(final Processor processor,
+        final Path path_in, final Path path_out, final Boolean resume_when_failure)
     {
         // We expect that whatever calls this routine has already normalized the paths to absolute.
         if (!path_in.isAbsolute())
@@ -81,7 +77,7 @@ public final class Repository
         // or include a date stamp in the output path that changes per run, or something.
         if (Files.exists(path_out, LinkOption.NOFOLLOW_LINKS))
         {
-            this.logger.failure("Fatal: Can't output to new file or dir at path " + path_out
+            this.logger.failure("Fatal: Can't output to new file/dir at path " + path_out
                 + " because some other file or dir already exists there.");
             return false;
         }
@@ -89,7 +85,7 @@ public final class Repository
         // already exists, and we will not be creating any nonexisting ancestor dirs.
         if (Files.notExists(path_out.getParent(), LinkOption.NOFOLLOW_LINKS))
         {
-            this.logger.failure("Fatal: Can't output to new file or dir at path " + path_out
+            this.logger.failure("Fatal: Can't output to new file/dir at path " + path_out
                 + " because its parent dir " + path_out.getParent() + " doesn't exist.");
             return false;
         }

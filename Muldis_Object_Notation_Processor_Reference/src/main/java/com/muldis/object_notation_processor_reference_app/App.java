@@ -170,12 +170,12 @@ public final class App
             System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Name.in);
             return;
         }
-        final Path path_in = Path.of(app_args.get(App_Arg_Name.in)).toAbsolutePath();
         if (!app_args.containsKey(App_Arg_Name.out))
         {
             System.out.println("Fatal: Task " + task + ": Missing argument: " + App_Arg_Name.out);
             return;
         }
+        final Path path_in = Path.of(app_args.get(App_Arg_Name.in)).toAbsolutePath();
         final Path path_out = Path.of(app_args.get(App_Arg_Name.out)).toAbsolutePath();
         final Logger logger = new Logger(System.out, verbose ? System.out : null);
         final Repository repository = new Repository(logger);
