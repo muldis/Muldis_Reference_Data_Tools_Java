@@ -114,7 +114,7 @@ sh muonp.sh duplicate --in=Muldis_Object_Notation_Processor_Reference/corpora --
 Simply running it without arguments or with `help` will display a *Usage* message.
 
 ```
-sh muon.sh help
+sh muonp.sh help
 ```
 
 I have not yet produced an alternate thin wrapper Windows shell script,
