@@ -12,12 +12,17 @@
     </parent>
 
     <groupId>com.muldis</groupId>
-    <artifactId>muldis-object-notation-processor-reference</artifactId>
+    <artifactId>muldis-object-notation-processor-reference-util</artifactId>
     <version>0.1</version>
 
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.muldis</groupId>
+            <artifactId>muldis-object-notation-processor-reference</artifactId>
+            <version>0.1</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

@@ -9,7 +9,7 @@ The fully-qualified name of what this document describes is
 
 # DESCRIPTION
 
-MUONP is an actively developed work in progress as of early February, 2023.
+MUONP is an actively developed work in progress.
 It is not yet ready to use for its intended purpose, nor is it yet even a
 minimum viable product.  But, it might be the latter within a few weeks.
 This documentation will be rewritten or updated as the project develops.
@@ -82,7 +82,7 @@ which can be obtained here (with no-cost Community licensing an option):
 
 <https://www.jetbrains.com/idea>
 
-MUONP is implemented with Java 17 (2021) which is cross-platform so you can
+MUONP is implemented with Java 20 (2023) which is cross-platform so you can
 use either the Apple MacOS or Microsoft Windows version of IntelliJ IDEA.
 I have done all development and testing so far on MacOS however.
 
@@ -108,7 +108,7 @@ the project is compiled.
 Here is an example of its use:
 
 ```
-sh muonp.sh duplicate --in=Muldis_Object_Notation_Processor_Reference/corpora --out=test_files_out
+sh muonp.sh duplicate --in=corpora --out=test_files_out
 ```
 
 Simply running it without arguments or with `help` will display a *Usage* message.

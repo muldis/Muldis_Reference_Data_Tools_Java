@@ -12,6 +12,8 @@
 
     <modules>
         <module>Muldis_Object_Notation_Processor_Reference</module>
+        <module>Muldis_Object_Notation_Processor_Reference_Util</module>
+        <module>Muldis_Object_Notation_Processor_Reference_App</module>
         <module>Muldis_Object_Notation_Validator</module>
         <module>Muldis_Service_Protocol_Bridge_Reference</module>
         <module>Muldis_Data_Engine_Reference</module>
