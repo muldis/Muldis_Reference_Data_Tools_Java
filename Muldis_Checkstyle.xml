@@ -9,6 +9,10 @@
     <property name="severity" value="error"/><!-- Factory is "error". -->
     <property name="tabWidth" value="4"/><!-- Factory is "8". -->
 
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="module\-info\.java$"/>
+    </module>
+
     <module name="SuppressWarningsFilter"/>
 
     <!-- HEADERS -->
