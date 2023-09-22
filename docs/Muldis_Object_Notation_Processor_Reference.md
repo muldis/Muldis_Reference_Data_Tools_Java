@@ -82,7 +82,7 @@ which can be obtained here (with no-cost Community licensing an option):
 
 <https://www.jetbrains.com/idea>
 
-MUONP is implemented with Java 20 (2023) which is cross-platform so you can
+MUONP is implemented with Java 21 (2023) which is cross-platform so you can
 use either the Apple MacOS or Microsoft Windows version of IntelliJ IDEA.
 I have done all development and testing so far on MacOS however.
 
