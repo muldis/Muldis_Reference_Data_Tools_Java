@@ -1,4 +1,4 @@
-package com.muldis.service_protocol_bridge_reference;
+package com.muldis.service_protocol_bridge_reference_2021;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;

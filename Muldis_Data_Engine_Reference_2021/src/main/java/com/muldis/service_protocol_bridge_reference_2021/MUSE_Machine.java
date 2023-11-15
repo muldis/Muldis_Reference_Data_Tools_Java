@@ -1,6 +1,6 @@
-package com.muldis.service_protocol_bridge_reference;
+package com.muldis.service_protocol_bridge_reference_2021;
 
-import com.muldis.object_notation_validator.Syntax_Java;
+import com.muldis.object_notation_validator_2021.Syntax_Java;
 
 import java.lang.reflect.InvocationTargetException;
 

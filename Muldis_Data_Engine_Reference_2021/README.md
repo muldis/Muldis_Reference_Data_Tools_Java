@@ -1,11 +1,11 @@
 # NAME
 
-Muldis Data Engine Reference: Java (MDE) - Reference interpreter implementation of Muldis Data Language
+Muldis Data Engine Reference 2021: Java (MDE) - Reference interpreter implementation of Muldis Data Language
 
 # VERSION
 
 The fully-qualified name of what this document describes is
-`Muldis_Data_Engine_Reference_Java https://muldis.com 0.1`.
+`Muldis_Data_Engine_Reference_2021_Java https://muldis.com 0.1`.
 
 # DESCRIPTION
 
@@ -17,7 +17,7 @@ Darren Duncan - darren@DarrenDuncan.net
 
 # LICENSE AND COPYRIGHT
 
-**Muldis Data Engine Reference: Java** (MDE) is Copyright © 2015-2023, Muldis Data Systems, Inc.
+**Muldis Data Engine Reference 2021: Java** (MDE) is Copyright © 2015-2021, Muldis Data Systems, Inc.
 
 <https://muldis.com>
 

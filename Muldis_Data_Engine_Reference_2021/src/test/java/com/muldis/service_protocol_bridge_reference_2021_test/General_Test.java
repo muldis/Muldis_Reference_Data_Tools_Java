@@ -1,4 +1,4 @@
-package com.muldis.service_protocol_bridge_reference_test;
+package com.muldis.service_protocol_bridge_reference_2021_test;
 
 import org.junit.jupiter.api.Test;
 

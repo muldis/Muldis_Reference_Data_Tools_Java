@@ -1,6 +1,6 @@
-package com.muldis.object_notation_validator_test;
+package com.muldis.object_notation_validator_2021_test;
 
-import com.muldis.object_notation_validator.Syntax_Java;
+import com.muldis.object_notation_validator_2021.Syntax_Java;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

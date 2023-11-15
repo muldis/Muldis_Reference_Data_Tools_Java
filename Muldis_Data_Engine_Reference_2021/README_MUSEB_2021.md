@@ -1,11 +1,11 @@
 # NAME
 
-Muldis Service Protocol Bridge Reference: Java (MUSEB) - Reference implementation of MUSE client
+Muldis Service Protocol Bridge Reference 2021: Java (MUSEB) - Reference implementation of MUSE client
 
 # VERSION
 
 The fully-qualified name of what this document describes is
-`Muldis_Service_Protocol_Bridge_Reference_Java https://muldis.com 0.1`.
+`Muldis_Service_Protocol_Bridge_Reference_2021_Java https://muldis.com 0.1`.
 
 # DESCRIPTION
 
@@ -17,7 +17,7 @@ Darren Duncan - darren@DarrenDuncan.net
 
 # LICENSE AND COPYRIGHT
 
-**Muldis Service Protocol Bridge Reference: Java** (MUSEB) is Copyright © 2015-2023, Muldis Data Systems, Inc.
+**Muldis Service Protocol Bridge Reference 2021: Java** (MUSEB) is Copyright © 2015-2021, Muldis Data Systems, Inc.
 
 <https://muldis.com>
 

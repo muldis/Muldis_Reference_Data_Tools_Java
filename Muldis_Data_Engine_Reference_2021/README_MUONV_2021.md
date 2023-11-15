@@ -1,11 +1,11 @@
 # NAME
 
-Muldis Object Notation Validator: Java (MUONV) - MUON artifact format validator
+Muldis Object Notation Validator 2021: Java (MUONV) - MUON artifact format validator
 
 # VERSION
 
 The fully-qualified name of what this document describes is
-`Muldis_Object_Notation_Validator_Java https://muldis.com 0.1`.
+`Muldis_Object_Notation_Validator_2021_Java https://muldis.com 0.1`.
 
 # DESCRIPTION
 
@@ -17,7 +17,7 @@ Darren Duncan - darren@DarrenDuncan.net
 
 # LICENSE AND COPYRIGHT
 
-**Muldis Object Notation Validator: Java** (MUONV) is Copyright © 2015-2023, Muldis Data Systems, Inc.
+**Muldis Object Notation Validator 2021: Java** (MUONV) is Copyright © 2015-2021, Muldis Data Systems, Inc.
 
 <https://muldis.com>
 

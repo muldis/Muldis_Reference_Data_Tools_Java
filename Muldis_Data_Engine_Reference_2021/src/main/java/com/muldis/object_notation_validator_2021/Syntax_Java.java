@@ -1,4 +1,4 @@
-package com.muldis.object_notation_validator;
+package com.muldis.object_notation_validator_2021;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

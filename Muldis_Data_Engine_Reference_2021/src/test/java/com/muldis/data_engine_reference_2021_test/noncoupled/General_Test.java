@@ -1,8 +1,8 @@
-package com.muldis.data_engine_reference_test.noncoupled;
+package com.muldis.data_engine_reference_2021_test.noncoupled;
 
-import com.muldis.service_protocol_bridge_reference.MUSE_Factory;
-import com.muldis.service_protocol_bridge_reference.MUSE_Machine;
-import com.muldis.service_protocol_bridge_reference.MUSE_Value;
+import com.muldis.service_protocol_bridge_reference_2021.MUSE_Factory;
+import com.muldis.service_protocol_bridge_reference_2021.MUSE_Machine;
+import com.muldis.service_protocol_bridge_reference_2021.MUSE_Value;
 
 import java.lang.reflect.InvocationTargetException;
 //import java.util.AbstractMap.SimpleImmutableEntry;
@@ -31,7 +31,7 @@ public final class General_Test
         if (MUSE_server_entrance_class_name == null)
         {
             throw new IllegalStateException("Usage requires -DMUSE_server_entrance_class_name"
-                + "=com.muldis.data_engine_reference.MUSE_Entrance or similar.");
+                + "=com.muldis.data_engine_reference_2021.MUSE_Entrance or similar.");
         }
 
         final MUSE_Factory factory = new MUSE_Factory(MUSE_server_entrance_class_name);
