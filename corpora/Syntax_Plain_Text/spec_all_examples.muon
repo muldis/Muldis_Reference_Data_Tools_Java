@@ -39,31 +39,19 @@
 `Muldis_Object_Notation_Sync_Mark`
 0/1
 `Muldis_Object_Notation_Sync_Mark`
-0/1*2^0
-`Muldis_Object_Notation_Sync_Mark`
-0/1*10^0
-`Muldis_Object_Notation_Sync_Mark`
 1.0
 `Muldis_Object_Notation_Sync_Mark`
 1/1
-`Muldis_Object_Notation_Sync_Mark`
-1/1*2^0
 `Muldis_Object_Notation_Sync_Mark`
 -1.0
 `Muldis_Object_Notation_Sync_Mark`
 -1/1
 `Muldis_Object_Notation_Sync_Mark`
--1/1*2^0
-`Muldis_Object_Notation_Sync_Mark`
 5/3
-`Muldis_Object_Notation_Sync_Mark`
-5/1*3^-1
 `Muldis_Object_Notation_Sync_Mark`
 -4.72
 `Muldis_Object_Notation_Sync_Mark`
 -472/100
-`Muldis_Object_Notation_Sync_Mark`
--472/1*10^-2
 `Muldis_Object_Notation_Sync_Mark`
 15_485_863/32_452_843
 `Muldis_Object_Notation_Sync_Mark`
@@ -75,9 +63,6 @@
 162259276829213363391578010288127
     /170141183460469231731687303715884105727
 `Muldis_Object_Notation_Sync_Mark`
-`Base 10.`
-4.5207196*10^37
-`Muldis_Object_Notation_Sync_Mark`
 `Base 16.`
 0xDEADBEEF.FACE
 `Muldis_Object_Notation_Sync_Mark`
@@ -87,8 +72,51 @@
 `Base 2.`
 0b1.1
 `Muldis_Object_Notation_Sync_Mark`
-`Base 2.`
-0b1.011101101*0b10^-0b11011
+0.0*2^0
+`Muldis_Object_Notation_Sync_Mark`
+0*2^0
+`Muldis_Object_Notation_Sync_Mark`
+1.0*2^0
+`Muldis_Object_Notation_Sync_Mark`
+1*2^0
+`Muldis_Object_Notation_Sync_Mark`
+-1.0*2^0
+`Muldis_Object_Notation_Sync_Mark`
+-1*2^0
+`Muldis_Object_Notation_Sync_Mark`
+1*2^1
+`Muldis_Object_Notation_Sync_Mark`
+1*2^-1
+`Muldis_Object_Notation_Sync_Mark`
+0xDEADBEEF*2^0x0
+`Muldis_Object_Notation_Sync_Mark`
+0xD.EADBEEF*2^0x38
+`Muldis_Object_Notation_Sync_Mark`
+0b1.011101101*2^-0b11011
+`Muldis_Object_Notation_Sync_Mark`
+0.0*10^0
+`Muldis_Object_Notation_Sync_Mark`
+0*10^0
+`Muldis_Object_Notation_Sync_Mark`
+1.0*10^0
+`Muldis_Object_Notation_Sync_Mark`
+1*10^0
+`Muldis_Object_Notation_Sync_Mark`
+-1.0*10^0
+`Muldis_Object_Notation_Sync_Mark`
+-1*10^0
+`Muldis_Object_Notation_Sync_Mark`
+1*10^1
+`Muldis_Object_Notation_Sync_Mark`
+1*10^-1
+`Muldis_Object_Notation_Sync_Mark`
+-4.72*10^0
+`Muldis_Object_Notation_Sync_Mark`
+-472*10^-2
+`Muldis_Object_Notation_Sync_Mark`
+4.5207196*10^37
+`Muldis_Object_Notation_Sync_Mark`
+45207196*10^30
 `Muldis_Object_Notation_Sync_Mark`
 0bb
 `Muldis_Object_Notation_Sync_Mark`
@@ -122,13 +150,13 @@
 `Muldis_Object_Notation_Sync_Mark`
 ""
 `Muldis_Object_Notation_Sync_Mark`
-`One ordered nonquoted Text (or, the first ordered attribute).`
+`One positional nonquoted Text (or, the first positional attribute).`
 0t0
 `Muldis_Object_Notation_Sync_Mark`
-`Same Text value (or, one ordered attr written in format of a named).`
+`Same Text value (or, one positional attr written in format of a named).`
 "\(0t0)"
 `Muldis_Object_Notation_Sync_Mark`
-`Another ordered nonquoted Text (or, the second ordered attribute).`
+`Another positional nonquoted Text (or, the second positional attribute).`
 0t1
 `Muldis_Object_Notation_Sync_Mark`
 Ceres
@@ -145,7 +173,7 @@ Ceres
 `Same thing.`
 "\u263A\u0041"
 `Muldis_Object_Notation_Sync_Mark`
-`One non-ordered quoted Text (or, one named attribute).`
+`One non-positional quoted Text (or, one named attribute).`
 "sales"
 `Muldis_Object_Notation_Sync_Mark`
 `Same thing but nonquoted.`
@@ -343,7 +371,7 @@ the_db::stats::"samples by order"
 `One named attribute.`
 {"First Name": Joy}
 `Muldis_Object_Notation_Sync_Mark`
-`One ordered attribute.`
+`One positional attribute.`
 {53}
 `Muldis_Object_Notation_Sync_Mark`
 `Same thing.`
@@ -359,7 +387,7 @@ the_db::stats::"samples by order"
     is_special : 0bTRUE,
 }
 `Muldis_Object_Notation_Sync_Mark`
-`Three ordered attributes.`
+`Three positional attributes.`
 {hello,26,0bTRUE}
 `Muldis_Object_Notation_Sync_Mark`
 `One of each.`
@@ -377,16 +405,16 @@ the_db::stats::"samples by order"
 `Higher-level Renaming type: Swap 2 named attributes.`
 (Renaming:{foo->bar,bar->foo})
 `Muldis_Object_Notation_Sync_Mark`
-`Higher-level Renaming type: Convert ordered names to nonordered.`
+`Higher-level Renaming type: Convert positional names to nonpositional.`
 (Renaming:{foo,bar})
 `Muldis_Object_Notation_Sync_Mark`
 `Higher-level Renaming type: Same thing.`
 (Renaming:{0t0->foo,0t1->bar})
 `Muldis_Object_Notation_Sync_Mark`
-`Higher-level Renaming type: Convert nonordered names to ordered.`
+`Higher-level Renaming type: Convert nonpositional names to positional.`
 (Renaming:{foo->0t0,bar->0t1})
 `Muldis_Object_Notation_Sync_Mark`
-`Higher-level Renaming type: Swap 2 ordered attributes.`
+`Higher-level Renaming type: Swap 2 positional attributes.`
 (Renaming:{0t0->0t1,0t1->0t0})
 `Muldis_Object_Notation_Sync_Mark`
 `Higher-level Renaming type: Same thing.`
