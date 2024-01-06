@@ -97,27 +97,27 @@ public final class Syntax_Java_Invalid_Test
     }
 
     @Test
-    public void not_Fraction()
+    public void not_Rational()
     {
         assertFalse(v.is_MUON_artifact(Float.NEGATIVE_INFINITY));
         assertFalse(v.is_MUON_artifact(Double.NEGATIVE_INFINITY));
         assertFalse(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Float.NEGATIVE_INFINITY)));
+            "Rational", Float.NEGATIVE_INFINITY)));
         assertFalse(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Double.NEGATIVE_INFINITY)));
+            "Rational", Double.NEGATIVE_INFINITY)));
 
         assertFalse(v.is_MUON_artifact(Float.POSITIVE_INFINITY));
         assertFalse(v.is_MUON_artifact(Double.POSITIVE_INFINITY));
         assertFalse(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Float.POSITIVE_INFINITY)));
+            "Rational", Float.POSITIVE_INFINITY)));
         assertFalse(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Double.POSITIVE_INFINITY)));
+            "Rational", Double.POSITIVE_INFINITY)));
 
         assertFalse(v.is_MUON_artifact(Float.NaN));
         assertFalse(v.is_MUON_artifact(Double.NaN));
         assertFalse(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Float.NaN)));
+            "Rational", Float.NaN)));
         assertFalse(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Double.NaN)));
+            "Rational", Double.NaN)));
     }
 }

@@ -79,41 +79,41 @@ public final class Syntax_Java_Valid_Test
     }
 
     @Test
-    public void so_Fraction()
+    public void so_Rational()
     {
         assertTrue(v.is_MUON_artifact(0f));
         assertTrue(v.is_MUON_artifact(0d));
         assertTrue(v.is_MUON_artifact(BigDecimal.ZERO));
-        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Fraction", 0f)));
-        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Fraction", 0d)));
+        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Rational", 0f)));
+        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Rational", 0d)));
         assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", BigDecimal.ZERO)));
+            "Rational", BigDecimal.ZERO)));
 
         assertTrue(v.is_MUON_artifact(1f));
         assertTrue(v.is_MUON_artifact(1d));
         assertTrue(v.is_MUON_artifact(BigDecimal.ONE));
-        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Fraction", 1f)));
-        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Fraction", 1d)));
+        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Rational", 1f)));
+        assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>("Rational", 1d)));
         assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", BigDecimal.ONE)));
+            "Rational", BigDecimal.ONE)));
 
         assertTrue(v.is_MUON_artifact(Float.MIN_VALUE));
         assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Float.MIN_VALUE)));
+            "Rational", Float.MIN_VALUE)));
 
         assertTrue(v.is_MUON_artifact(Float.MAX_VALUE));
         assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Float.MAX_VALUE)));
+            "Rational", Float.MAX_VALUE)));
 
         assertTrue(v.is_MUON_artifact(Double.MIN_VALUE));
         assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Double.MIN_VALUE)));
+            "Rational", Double.MIN_VALUE)));
 
         assertTrue(v.is_MUON_artifact(Double.MAX_VALUE));
         assertTrue(v.is_MUON_artifact(new SimpleImmutableEntry<String, Object>(
-            "Fraction", Double.MAX_VALUE)));
+            "Rational", Double.MAX_VALUE)));
 
-        // TODO: Tuple D1..D4 possreps for Fraction.
+        // TODO: Tuple D1..D4 possreps for Rational.
     }
 
     @Test
@@ -175,7 +175,7 @@ public final class Syntax_Java_Valid_Test
     }
 
     @Test
-    public void so_Duo()
+    public void so_Pair()
     {
     }
 
@@ -208,18 +208,18 @@ public final class Syntax_Java_Valid_Test
         final MUSE_Value f1 = machine.MUSE_import(2.3M);
         final MUSE_Value f2 = machine.MUSE_import(02340233.23402532000M);
         final MUSE_Value f3 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(13,5)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(13,5)));
         final MUSE_Value f4 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(27,6)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(27,6)));
         final MUSE_Value f5 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(35,-41)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(35,-41)));
         final MUSE_Value f6 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(
+            "Rational", new SimpleImmutableEntry<Object, Object>(
                 new BigInteger(-54235435432),new BigInteger(32543252))));
         final MUSE_Value f7 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(26,13)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(26,13)));
         final MUSE_Value f8 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(5,1)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(5,1)));
         final MUSE_Value f9 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(5,-1)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(5,-1)));
 */

@@ -62,20 +62,20 @@ public final class General_Test
         final MUSE_Value f1 = machine.MUSE_import(2.3M);
         final MUSE_Value f2 = machine.MUSE_import(02340233.23402532000M);
         final MUSE_Value f3 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(13,5)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(13,5)));
         final MUSE_Value f4 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(27,6)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(27,6)));
         final MUSE_Value f5 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(35,-41)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(35,-41)));
         final MUSE_Value f6 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(
+            "Rational", new SimpleImmutableEntry<Object, Object>(
                 new BigInteger(-54235435432),new BigInteger(32543252))));
         final MUSE_Value f7 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(26,13)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(26,13)));
         final MUSE_Value f8 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(5,1)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(5,1)));
         final MUSE_Value f9 = machine.MUSE_import(new SimpleImmutableEntry<String, Object>(
-            "Fraction", new SimpleImmutableEntry<Object, Object>(5,-1)));
+            "Rational", new SimpleImmutableEntry<Object, Object>(5,-1)));
         */
     }
 }

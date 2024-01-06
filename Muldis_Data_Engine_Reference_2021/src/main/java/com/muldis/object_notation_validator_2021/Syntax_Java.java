@@ -23,7 +23,7 @@ public final class Syntax_Java
             return this.SYS_Ignorance(value)
                 || this.SYS_Boolean(value)
                 || this.SYS_Integer(value)
-                || this.SYS_Fraction(value)
+                || this.SYS_Rational(value)
                 || this.SYS_Bits(value)
                 || this.SYS_Text(value)
                 || this.SYS_Array(value)
@@ -39,9 +39,9 @@ public final class Syntax_Java
                 return this.SYS_Boolean(MUON_subject);
             case "Integer":
                 return this.SYS_Integer(MUON_subject);
-            case "Fraction":
-                // TODO: Tuple D1..D4 possreps for Fraction.
-                return this.SYS_Fraction(MUON_subject);
+            case "Rational":
+                // TODO: Tuple D1..D4 possreps for Rational.
+                return this.SYS_Rational(MUON_subject);
             case "Bits":
                 return this.SYS_Bits(MUON_subject);
             case "Blob":
@@ -80,7 +80,7 @@ public final class Syntax_Java
             || value instanceof BigInteger;
     }
 
-    private Boolean SYS_Fraction(final Object value)
+    private Boolean SYS_Rational(final Object value)
     {
         if (value instanceof Float)
         {
