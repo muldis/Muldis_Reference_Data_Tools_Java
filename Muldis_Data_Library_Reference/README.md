@@ -17,7 +17,7 @@ Darren Duncan - darren@DarrenDuncan.net
 
 # LICENSE AND COPYRIGHT
 
-**Muldis Data Library Reference: Java** (MDLIB) is Copyright © 2015-2023, Muldis Data Systems, Inc.
+**Muldis Data Library Reference: Java** (MDLIB) is Copyright © 2015-2024, Muldis Data Systems, Inc.
 
 <https://muldis.com>
 
