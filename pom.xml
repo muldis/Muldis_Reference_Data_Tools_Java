@@ -11,11 +11,11 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>Muldis_Data_Library</module>
         <module>Muldis_Object_Notation_Processor_Reference</module>
         <module>Muldis_Object_Notation_Processor_Reference_Util</module>
         <module>Muldis_Object_Notation_Processor_Reference_App</module>
         <module>Muldis_Data_Engine_Reference_2021</module>
-        <module>Muldis_Data_Library_Reference</module>
     </modules>
 
     <properties>

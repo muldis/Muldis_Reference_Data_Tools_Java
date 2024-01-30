@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.muldis</groupId>
-    <artifactId>muldis-data-library-reference</artifactId>
+    <artifactId>muldis-data-library</artifactId>
     <version>0.1</version>
 
     <packaging>jar</packaging>
