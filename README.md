@@ -2,11 +2,8 @@
 
 **IMPORTANT NOTICE:
 This repository, with the Java version of "Muldis Reference Data Tools",
-is currently lagging far behind the .NET version of the same.
-For now you should see the .NET version instead to have a better idea where
-this will all be going.
-In the near future this Java version will be rewritten so it is as up to
-date as the .NET version.**
+may sometimes lag behind the .NET version of the same,
+so it is worth also looking at the latter for additional content.**
 
 This repository or distribution features the following projects,
 each of which is intended to produce its own JAR for distribution;

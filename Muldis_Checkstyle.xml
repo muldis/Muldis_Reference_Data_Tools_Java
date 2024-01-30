@@ -275,7 +275,7 @@
         <!-- Deliberately excluding module: <module name="ClassMemberImpliedModifier"/> -->
         <!-- Deliberately excluding module: <module name="InterfaceMemberImpliedModifier"/> -->
         <module name="ModifierOrder"/>
-        <module name="RedundantModifier"/>
+        <!-- Deliberately excluding module: <module name="RedundantModifier"/> -->
 
         <!-- NAMING CONVENTIONS -->
         <!-- Deliberately excluding module: <module name="AbbreviationAsWordInName"/> -->
@@ -284,10 +284,10 @@
             <property name="ignoreModifier" value="true"/><!-- Factory is "false". -->
         </module>
         <!-- Deliberately excluding module: <module name="CatchParameterName"/> -->
-        <module name="ClassTypeParameterName"/>
+        <!-- Deliberately excluding module: <module name="ClassTypeParameterName"/> -->
         <!-- Deliberately excluding module: <module name="ConstantName"/> -->
         <module name="IllegalIdentifierName"/>
-        <module name="InterfaceTypeParameterName"/>
+        <!-- Deliberately excluding module: <module name="InterfaceTypeParameterName"/> -->
         <!-- Deliberately excluding module: <module name="LambdaParameterName"/> -->
         <!-- Deliberately excluding module: <module name="LocalFinalVariableName"/> -->
         <!-- Deliberately excluding module: <module name="LocalVariableName"/> -->

@@ -9,9 +9,16 @@ The fully-qualified name of what this document describes is
 
 # DESCRIPTION
 
-MUONP is an actively developed work in progress.
+**IMPORTANT NOTICE:
+The current project "Muldis Object Notation Processor Reference"
+has been partially superseded by the other project "Muldis Data Library".
+Any further work on the current project is blocked until
+"Muldis Data Library" has been sufficiently completed, after which the
+latter is intended to be a foundation for the current project.**
+
+MUONP is a work in progress.
 It is not yet ready to use for its intended purpose, nor is it yet even a
-minimum viable product.  But, it might be the latter within a few weeks.
+minimum viable product.
 This documentation will be rewritten or updated as the project develops.
 
 ## What This Is Intended To Be
