@@ -1,6 +1,6 @@
 package com.muldis.data_library;
 
-public final class MDV_Boolean implements MDV_Bicessable<MDV_Boolean>
+public final class MDV_Boolean implements MDV_Orderable<MDV_Boolean>
 {
     private static final MDV_Boolean __false = new MDV_Boolean(false);
     private static final MDV_Boolean __true = new MDV_Boolean(true);
@@ -75,34 +75,6 @@ public final class MDV_Boolean implements MDV_Bicessable<MDV_Boolean>
     {
         final MDV_Boolean topic_0 = this;
         return !topic_0.__as_boolean || topic_1.__as_boolean;
-    }
-
-    public MDV_Any asset()
-    {
-        final MDV_Boolean topic = this;
-        return topic;
-    }
-
-    public MDV_Successable<MDV_Boolean> succ()
-    {
-        final MDV_Boolean topic = this;
-        if (topic.__as_boolean)
-        {
-            // Alternate conceptually is After_All_Others.
-            throw new UnsupportedOperationException();
-        }
-        return MDV_Boolean.true_();
-    }
-
-    public MDV_Bicessable<MDV_Boolean> pred()
-    {
-        final MDV_Boolean topic = this;
-        if (!topic.__as_boolean)
-        {
-            // Alternate conceptually is Before_All_Others.
-            throw new UnsupportedOperationException();
-        }
-        return MDV_Boolean.false_();
     }
 
     public static MDV_Boolean false_()
