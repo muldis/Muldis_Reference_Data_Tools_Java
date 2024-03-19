@@ -61,7 +61,7 @@ public final class MDV_Rational
         BigInteger result_n = numerator;
         BigInteger result_d = denominator;
         // Ensure denominator is positive.
-        if (result_d.compareTo(BigInteger.ZERO) == -1)
+        if (result_d.compareTo(BigInteger.ZERO) < 0)
         {
             result_n = result_n.negate();
             result_d = result_d.negate();
@@ -69,7 +69,7 @@ public final class MDV_Rational
         final BigInteger gcd = MDV_Integer._greatest_common_divisor(
             result_n, result_d);
         // Ensure numerator and denominator normalized/reduced/coprime.
-        if (gcd.compareTo(BigInteger.ONE) == 1)
+        if (gcd.compareTo(BigInteger.ONE) > 0)
         {
             result_n = result_n.divide(gcd);
             result_d = result_d.divide(gcd);
