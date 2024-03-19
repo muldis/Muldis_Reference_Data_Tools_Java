@@ -130,16 +130,24 @@ public final class MDV_Integer
         return topic;
     }
 
-    public MDV_Successable<MDV_Integer> succ()
+    public MDV_Successable<MDV_Integer> nth_succ(final MDV_Integer topic_1)
     {
-        final MDV_Integer topic = this;
-        return MDV_Integer.from(topic.__as_BigInteger.add(BigInteger.ONE));
+        final MDV_Integer topic_0 = this;
+        if (topic_1.__as_BigInteger.compareTo(BigInteger.ZERO) < 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        return MDV_Integer.from(topic_0.__as_BigInteger.add(topic_1.__as_BigInteger));
     }
 
-    public MDV_Bicessable<MDV_Integer> pred()
+    public MDV_Bicessable<MDV_Integer> nth_pred(final MDV_Integer topic_1)
     {
-        final MDV_Integer topic = this;
-        return MDV_Integer.from(topic.__as_BigInteger.subtract(BigInteger.ONE));
+        final MDV_Integer topic_0 = this;
+        if (topic_1.__as_BigInteger.compareTo(BigInteger.ZERO) < 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        return MDV_Integer.from(topic_0.__as_BigInteger.subtract(topic_1.__as_BigInteger));
     }
 
     public MDV_Boolean so_zero()
