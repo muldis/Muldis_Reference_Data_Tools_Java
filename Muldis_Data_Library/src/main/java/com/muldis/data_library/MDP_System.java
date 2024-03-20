@@ -411,4 +411,13 @@ public final class MDP_System
         }
         return MDV_Boolean.from(topic instanceof MDV_Text);
     }
+
+    public static MDV_Boolean Name(final MDV_Any topic)
+    {
+        if (topic == null)
+        {
+            throw new IllegalArgumentException();
+        }
+        return MDV_Boolean.from(topic instanceof MDV_Name);
+    }
 }

@@ -108,26 +108,16 @@ final class Internal_Identity
 
     static String Text(final MDV_Text topic)
     {
-        return Internal_Identity._Text(topic.code_point_members_as_String());
+        return Internal_Identity.quoted_char_seq(
+            topic.code_point_members_as_String());
     }
 
-    private static String _Text(final String topic)
+    private static String quoted_char_seq(final String topic)
     {
         if (topic.isEmpty())
         {
             return "\"\"";
         }
-        if (topic.length() == 1 && ((int) topic.charAt(0)) <= 0x1F)
-        {
-            // Format as a code-point-text.
-            return "0t" + ((int) topic.charAt(0));
-        }
-        if (Pattern.matches("\\A[A-Za-z_][A-Za-z_0-9]*\\z", topic))
-        {
-            // Format as a nonquoted-alphanumeric-text.
-            return topic;
-        }
-        // Else, format as a quoted text.
         if (!Pattern.matches("[\u0000-\u001F\"\\\\`\u007F-\u009F]", topic))
         {
             return "\"" + topic + "\"";
@@ -174,7 +164,7 @@ final class Internal_Identity
                 default:
                     if (c <= 0x1F || (c >= 0x7F && c <= 0x9F))
                     {
-                        sb.append("\\(0t" + ((char) c) + ")");
+                        sb.append("\\(" + ((char) c) + ")");
                     }
                     else
                     {
@@ -184,5 +174,27 @@ final class Internal_Identity
             }
         }
         return "\"" + sb.toString() + "\"";
+    }
+
+    static String Name(final MDV_Name topic)
+    {
+        return ":" + Internal_Identity.Name_nonqualified(
+            topic.code_point_members_as_String());
+    }
+
+    private static String Name_nonqualified(final String topic)
+    {
+        if (topic.length() == 1 && ((int) topic.charAt(0)) <= 0x1F)
+        {
+            // Format as a code-point-text.
+            return "" + ((int) topic.charAt(0));
+        }
+        if (Pattern.matches("\\A[A-Za-z_][A-Za-z_0-9]*\\z", topic))
+        {
+            // Format as a nonquoted-alphanumeric-text.
+            return topic;
+        }
+        // Else, format as a quoted text.
+        return Internal_Identity.quoted_char_seq(topic);
     }
 }
