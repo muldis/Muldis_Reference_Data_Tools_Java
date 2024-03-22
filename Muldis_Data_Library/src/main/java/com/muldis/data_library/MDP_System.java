@@ -157,67 +157,6 @@ public final class MDP_System
         return topic_0.max(topic_1);
     }
 
-    public static MDV_Boolean Successable(final MDV_Any topic)
-    {
-        if (topic == null)
-        {
-            throw new IllegalArgumentException();
-        }
-        return MDV_Boolean.from(topic instanceof MDV_Successable);
-    }
-
-    public static MDV_Any asset(final MDV_Successable<MDV_Any> topic)
-    {
-        return topic.asset();
-    }
-
-    public static MDV_Successable<MDV_Any> succ(final MDV_Successable<MDV_Any> topic)
-    {
-        return topic.succ();
-    }
-
-    public static MDV_Successable<MDV_Any> nth_succ(
-        final MDV_Successable<MDV_Any> topic_0, final MDV_Integer topic_1)
-    {
-        if (topic_0 == null)
-        {
-            throw new IllegalArgumentException();
-        }
-        if (topic_1.before(MDV_Integer.zero_()).as_boolean())
-        {
-            throw new IllegalArgumentException();
-        }
-        return topic_0.nth_succ(topic_1);
-    }
-
-    public static MDV_Boolean Bicessable(final MDV_Any topic)
-    {
-        if (topic == null)
-        {
-            throw new IllegalArgumentException();
-        }
-        return MDV_Boolean.from(topic instanceof MDV_Bicessable);
-    }
-
-    public static MDV_Bicessable<MDV_Any> pred(final MDV_Bicessable<MDV_Any> topic)
-    {
-        return topic.pred();
-    }
-
-    public static MDV_Bicessable<MDV_Any> nth_pred(
-        final MDV_Bicessable<MDV_Any> topic_0, final MDV_Integer topic_1)
-    {
-        if (topic_0 == null)
-        {
-            throw new IllegalArgumentException();
-        }
-        if (topic_1.before(MDV_Integer.zero_()).as_boolean())
-        {
-            throw new IllegalArgumentException();
-        }
-        return topic_0.nth_pred(topic_1);
-    }
-
     public static MDV_Boolean Boolean(final MDV_Any topic)
     {
         if (topic == null)

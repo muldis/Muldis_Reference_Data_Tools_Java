@@ -3,7 +3,7 @@ package com.muldis.data_library;
 import java.math.BigInteger;
 
 public final class MDV_Integer
-    implements MDV_Bicessable<MDV_Integer>, MDV_Numerical<MDV_Integer>
+    implements MDV_Orderable<MDV_Integer>, MDV_Numerical<MDV_Integer>
 {
     private static final MDV_Integer __negative_one
         = new MDV_Integer(BigInteger.valueOf(-1));
@@ -122,32 +122,6 @@ public final class MDV_Integer
     {
         final MDV_Integer topic_0 = this;
         return topic_0.__as_BigInteger.compareTo(topic_1.__as_BigInteger) <= 0;
-    }
-
-    public MDV_Any asset()
-    {
-        final MDV_Integer topic = this;
-        return topic;
-    }
-
-    public MDV_Successable<MDV_Integer> nth_succ(final MDV_Integer topic_1)
-    {
-        final MDV_Integer topic_0 = this;
-        if (topic_1.__as_BigInteger.compareTo(BigInteger.ZERO) < 0)
-        {
-            throw new IllegalArgumentException();
-        }
-        return MDV_Integer.from(topic_0.__as_BigInteger.add(topic_1.__as_BigInteger));
-    }
-
-    public MDV_Bicessable<MDV_Integer> nth_pred(final MDV_Integer topic_1)
-    {
-        final MDV_Integer topic_0 = this;
-        if (topic_1.__as_BigInteger.compareTo(BigInteger.ZERO) < 0)
-        {
-            throw new IllegalArgumentException();
-        }
-        return MDV_Integer.from(topic_0.__as_BigInteger.subtract(topic_1.__as_BigInteger));
     }
 
     public MDV_Boolean so_zero()
