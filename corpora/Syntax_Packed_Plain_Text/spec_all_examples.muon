@@ -290,11 +290,20 @@ b
 `Same thing (3 octets).`
 B""
 `Muldis_Object_Notation_Sync_Mark`
+`Same thing (3 octets).`
+B[]
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (5 octets).`
+B[""]
+`Muldis_Object_Notation_Sync_Mark`
 `One zero octet (2 octets); also known as 0xx0.`
 o\00
 `Muldis_Object_Notation_Sync_Mark`
 `Same thing (4 octets).`
 B"\00"
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (6 octets).`
+B["\00"]
 `Muldis_Object_Notation_Sync_Mark`
 `One one octet (2 octets); also known as 0xx1.`
 o\01
@@ -317,6 +326,9 @@ o\k
 `The 4-octet string 0xxA705_E416 (7 octets).`
 B"\A7\05\E4\16"
 `Muldis_Object_Notation_Sync_Mark`
+`Same thing (12 octets).`
+B["\A7\05" "\E4\16"]
+`Muldis_Object_Notation_Sync_Mark`
 `The 2-octet string 0xb00101110_10001011 (7 octets).`
 B"\2E\8B"
 `Muldis_Object_Notation_Sync_Mark`
@@ -326,36 +338,10 @@ t
 `Same thing (3 octets).`
 T""
 `Muldis_Object_Notation_Sync_Mark`
-`The 1-character UTF-8 string 0t0 or "\(0t0)" (1 octet);`
-`also known as the first positional attribute name.`
-\00
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (2 octets).`
-u\00
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (4 octets).`
-T"\00"
-`Muldis_Object_Notation_Sync_Mark`
-`The 1-character UTF-8 string 0t1 or "\(0t1)" (1 octet);`
-`also known as the second positional attribute name.`
-\01
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (2 octets).`
-u\01
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (4 octets).`
-T"\01"
-`Muldis_Object_Notation_Sync_Mark`
-`The 5-character UTF-8 string "Ceres" (6 octets).`
-yCeres
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (8 octets).`
+`The 5-character UTF-8 string "Ceres" (8 octets).`
 T"Ceres"
 `Muldis_Object_Notation_Sync_Mark`
-`The 1-character UTF-8 string "⨝" (4 octets).`
-w\E2\A8\9D
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (6 octets).`
+`The 1-character UTF-8 string "⨝" (6 octets).`
 T"\E2\A8\9D"
 `Muldis_Object_Notation_Sync_Mark`
 `The 4-character UTF-8 string "サンプル" (15 octets).`
@@ -364,44 +350,64 @@ T"\E3\82\B5\E3\83\B3\E3\83\97\E3\83\AB"
 `A 24 character UTF-8 string (27 octets).`
 T"This isn't not escaped.\0A"
 `Muldis_Object_Notation_Sync_Mark`
-`The 2-character UTF-8 string "\(0tx263A)\(0t65)" (5 octets).`
-x\E2\98\BA\41
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (7 octets).`
+`The 2-character UTF-8 string "\(0x263A)\(65)" (7 octets).`
 T"\E2\98\BA\41"
 `Muldis_Object_Notation_Sync_Mark`
+`Empty character UTF-8 string (1 octet); also known as "".`
+n
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (3 octets).`
+N""
+`Muldis_Object_Notation_Sync_Mark`
+`The 1-character UTF-8 string :0 or "\(0)" (1 octet);`
+`also known as the first positional attribute name.`
+\00
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (2 octets).`
+u\00
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (4 octets).`
+N"\00"
+`Muldis_Object_Notation_Sync_Mark`
+`The 1-character UTF-8 string :1 or "\(1)" (1 octet);`
+`also known as the second positional attribute name.`
+\01
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (2 octets).`
+u\01
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (4 octets).`
+N"\01"
+`Muldis_Object_Notation_Sync_Mark`
+`The 4-character UTF-8 string "age" (4 octets).`
+wage
+`Muldis_Object_Notation_Sync_Mark`
+`Same thing (6 octets).`
+N"age"
+`Muldis_Object_Notation_Sync_Mark`
 `A 10-character UTF-8 string (13 octets).`
-T"First Name"
+N"First Name"
 `Muldis_Object_Notation_Sync_Mark`
 `The Nesting with exactly 1 element that is the empty character UTF-8`
-`string (2 octets); also known as ::"".`
-nt
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (4 octets).`
-N[t]
+`string (4 octets); also known as ::"".`
+E[n]
 `Muldis_Object_Notation_Sync_Mark`
 `The Nesting with exactly 1 element that is the first positional`
-`attribute name (2 octets); also known as ::0t0.`
-n\00
-`Muldis_Object_Notation_Sync_Mark`
-`Same thing (4 octets).`
-N[\00]
+`attribute name (4 octets); also known as ::0.`
+E[\00]
 `Muldis_Object_Notation_Sync_Mark`
 `The Nesting with exactly 1 element that is the 6-charater UTF-8`
-`string "person" (8 octets); also known as ::person.`
-nzperson
+`string "person" (10 octets); also known as ::person.`
+E[zperson]
 `Muldis_Object_Notation_Sync_Mark`
-`Same thing (10 octets).`
-N[zperson]
+`The 2-element Nesting ::person::birth_date (23 octets).`
+E[zpersonN"birth_date"]
 `Muldis_Object_Notation_Sync_Mark`
-`The 2-element Nesting person::birth_date (23 octets).`
-N[zpersonT"birth_date"]
+`The 3-element Nesting ::person::birth_date::year (28 octets).`
+E[zpersonN"birth_date"xyear]
 `Muldis_Object_Notation_Sync_Mark`
-`The 3-element Nesting person::birth_date::year (28 octets).`
-N[zpersonT"birth_date"xyear]
-`Muldis_Object_Notation_Sync_Mark`
-`The 3-element Nesting the_db::stats::"samples by order" (35 octets).`
-N[zthe_dbystatsT"samples by order"]
+`The 3-element Nesting ::the_db::stats::"samples by order" (35 octets).`
+E[zthe_dbystatsN"samples by order"]
 `Muldis_Object_Notation_Sync_Mark`
 `Pair of Ignorance (3 octets); also known as (0iIGNORANCE: 0iIGNORANCE).`
 P__
@@ -409,9 +415,9 @@ P__
 `Pair of Integer (4 octets); also known as (5: -3).`
 P5d\FD
 `Muldis_Object_Notation_Sync_Mark`
-`Pair of Text (18 octets); also known as ("First Name": Joy).`
-PT"First Name"wJoy
+`Pair of Name+Text (20 octets); also known as (:"First Name" : "Joy").`
+PN"First Name"T"Joy"
 `Muldis_Object_Notation_Sync_Mark`
-`Another Pair (5 octets); also known as (x:y).`
+`Another Pair (5 octets); also known as (:x : :y).`
 Puxuy
 `Muldis_Object_Notation_Sync_Mark`
